@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,5 +23,6 @@ public class PlayerController : MonoBehaviour
     public void SetMovement(InputAction.CallbackContext context)
     {
         Debug.Log("Test");
+        Debug.Log(context.ReadValue<Vector2>());
     }
 }
