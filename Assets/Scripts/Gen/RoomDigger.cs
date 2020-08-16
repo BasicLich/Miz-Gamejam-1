@@ -5,13 +5,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public enum Size
-{
-    SMALL,
-    MEDIUM,
-    LARGE
-}
-
 public enum Dir
 {
     LEFT,
@@ -32,25 +25,39 @@ public class RoomDigger
 
     public List<Rect> rooms;
     public List<Rect> corridors;
+    public Rect tempCorridor;
 
     Vector2Int corridorSize = new Vector2Int(4,15);
     Vector2Int roomSize = new Vector2Int(6,10);
     Vector2Int maxSize = new Vector2Int(64, 64);
+    Vector2Int roomCount;
     TileBase placeholder = TileLoader.LoadTile("Tiles/Color/", "placeholder");
     System.Random random = new System.Random();
     // Array dirs = Enum.GetValues(typeof(Dir));
 
-    public TileBase[,] TryMakeRoom(Vector2Int roomSize, Vector2Int corridorSize, Vector2Int maxSize)
+    public TileBase[,] TryMakeRoom(Vector2Int roomSize, Vector2Int corridorSize, Vector2Int maxSize, Vector2Int roomCount, int tries)
     {
         this.roomSize = roomSize;
         this.corridorSize = corridorSize;
         this.maxSize = maxSize;
+        this.roomCount = roomCount;
 
-        rooms = new List<Rect>();
-        corridors = new List<Rect>();
 
-        TileBase[,] slate = new TileBase[maxSize.x, maxSize.y];
-        return GenBigRoom(slate, new Vector2Int(roomSize.y, roomSize.y), Dir.RIGHT);
+        TileBase[,] roomTiles = new TileBase[0,0];
+        while (tries != 0)
+        { 
+            tempCorridor = Rect.zero;
+            rooms = new List<Rect>();
+            corridors = new List<Rect>();
+            roomTiles = GenBigRoom(new TileBase[maxSize.x, maxSize.y], new Vector2Int(roomSize.y, roomSize.y), Dir.RIGHT);
+            if (rooms.Count < roomCount.x) {
+                tries--;
+                continue;
+            };
+            return roomTiles;
+        }
+        Debug.Log("Failed to produce enough rooms! Current count: " + rooms.Count);
+        return roomTiles;
     }
 
 
@@ -60,7 +67,24 @@ public class RoomDigger
         {
             if (newRoom.Overlaps(room)) return true;
         }
-        rooms.Add(newRoom);
+        foreach (Rect corridor in corridors)
+        {
+            if (newRoom.Overlaps(corridor)) return true;
+        }
+        return false;
+    }
+
+    private bool checkCorridorCollision(Rect newCorridor)
+    {
+        List<Rect> butLastRoom = rooms.GetRange(0, rooms.Count - 1);
+        foreach (Rect room in butLastRoom)
+        {
+            if (newCorridor.Overlaps(room)) return true;
+        }
+        foreach (Rect corridor in corridors)
+        {
+            if (newCorridor.Overlaps(corridor)) return true;
+        }
         return false;
     }
 
@@ -128,11 +152,15 @@ public class RoomDigger
 
         // Add new room
         rooms.Add(subRoomRect);
+        if (tempCorridor.xMax != 0 || tempCorridor.yMax != 0) corridors.Add(tempCorridor);
+
+
         TileBase[,] subRoomTiles = BuildRoom(subRoomWidth, subRoomHeight);
         ArrayUtils.Merge2DArrays(roomTiles, subRoomTiles,
             new Vector2Int((int)subRoomRect.xMin, (int)subRoomRect.yMin));
 
-
+        // Terminate if max room count reached
+        if (rooms.Count > roomCount.y) return roomTiles;
 
         // CORRIDOR GEN
 
@@ -181,25 +209,42 @@ public class RoomDigger
             int corridorLength = random.Next(corridorSize.x, corridorSize.y);
             Vector2Int corridorEnd = corridorStart + directions[newDir] * corridorLength;
 
+            // FIXME: We build the corridor early to construct the rect for collision detection
+            // Rect construction should be decoupled from buildCorridor
+            TileBase[,] corridorTiles = BuildCorridor(corridorStart, corridorEnd, newDir);
+            switch (newDir)
+            {
+                case Dir.LEFT: case Dir.DOWN:
+                    tempCorridor = new Rect(corridorEnd.x, corridorEnd.y, corridorTiles.GetLength(0), corridorTiles.GetLength(1));
+                    break;
+                case Dir.RIGHT: case Dir.UP:
+                    tempCorridor = new Rect(corridorStart.x, corridorStart.y, corridorTiles.GetLength(0), corridorTiles.GetLength(1));
+                    break;
+                default: tempCorridor = Rect.zero; break;
+            }
+
+            if (checkCorridorCollision(tempCorridor)) continue;
+
             // Recurse (attempt to place room at corridor end)
             recursedTiles = GenBigRoom((TileBase[,])roomTiles.Clone(), corridorEnd - directions[newDir], newDir);
 
             // Recursion was unable to place room: try another direction
-            if (recursedTiles.GetLength(0) == 0) continue;
+            if (recursedTiles.GetLength(0) == 0) {
+                continue;
+            };
 
             // Recursion succeeded, stop trying directions
             // Merge in recursed rooms & corridors
             ArrayUtils.Merge2DArrays(roomTiles, recursedTiles, Vector2Int.zero);
 
-            // Merge in corridor
-            TileBase[,] corridorTiles = BuildCorridor(corridorStart, corridorEnd, newDir);
-
             switch (newDir)
             {
                 case Dir.LEFT: case Dir.DOWN:
-                    ArrayUtils.Merge2DArrays(roomTiles, corridorTiles, corridorEnd, true); break;
+                    ArrayUtils.Merge2DArrays(roomTiles, corridorTiles, corridorEnd, true);
+                    break;
                 case Dir.RIGHT: case Dir.UP:
-                    ArrayUtils.Merge2DArrays(roomTiles, corridorTiles, corridorStart, true); break;
+                    ArrayUtils.Merge2DArrays(roomTiles, corridorTiles, corridorStart, true);
+                    break;
             }
 
             break;
@@ -234,7 +279,6 @@ public class RoomDigger
 
         int width = corridor.GetLength(0);
         int height = corridor.GetLength(1);
-        Debug.Log(width+ ", " + height);
 
         if (hor)
             for (int x = 0; x < width; x++)
@@ -259,13 +303,13 @@ public class RoomDigger
                 for (int y = 0; y < height; y++)
                     if (y == 0)
                     {
-                        if (x == 0) corridor[x,y] = tileDict["horBotRight"];
-                        else if (x == 2) corridor[x,y] = tileDict["horBotLeft"];
+                        if (x == 0) corridor[x,y] = tileDict["vertBotLeft"];
+                        else if (x == 2) corridor[x,y] = tileDict["vertBotRight"];
                     }
                     else if (y == height - 1)
                     {
-                        if (x == 0) corridor[x,y] = tileDict["horTopRight"];
-                        else if (x == 2) corridor[x,y] = tileDict["horTopLeft"];
+                        if (x == 0) corridor[x,y] = tileDict["vertTopLeft"];
+                        else if (x == 2) corridor[x,y] = tileDict["vertTopRight"];
                     }
                     else
                     {

@@ -9,10 +9,11 @@ public class GenComponent : MonoBehaviour
     // public int townWidth, townHeight, houseWidth, houseHeight, rand, margin, randPoints, numRoads;
     public Tilemap room;
     public RoomDigger digger;
-    public Vector2Int roomSize, corridorLength, maxSize;
+    public Vector2Int roomSize, corridorLength, maxSize, roomCount;
+    public int tries;
     public void GenAndRender() {
         digger = new RoomDigger();
-        TileBase[,] hey = digger.TryMakeRoom(roomSize, corridorLength, maxSize);
+        TileBase[,] hey = digger.TryMakeRoom(roomSize, corridorLength, maxSize, roomCount, tries);
         RenderTiles(hey);
     }
 
@@ -31,6 +32,31 @@ public class GenComponent : MonoBehaviour
             }
         }
     }
+
+    void OnDrawGizmosSelected()
+    {
+        // Orange
+        Gizmos.color = new Color(1.0f, 0.5f, 0.0f);
+        if (digger != null)
+        { 
+            foreach (Rect rect in digger.rooms)
+            {
+                DrawRect(rect);
+            }
+            foreach (Rect rect in digger.corridors)
+            {
+                DrawRect(rect);
+            }
+        }
+    }
+     
+    void DrawRect(Rect rect)
+    {
+        Gizmos.DrawWireCube(new Vector3(rect.center.x, rect.center.y, 0.01f), new Vector3(rect.size.x, rect.size.y, 0.01f));
+    }
+
+
+
 }
 
 [CustomEditor(typeof(GenComponent))]

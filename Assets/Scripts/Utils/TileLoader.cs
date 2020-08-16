@@ -41,6 +41,11 @@ public static class TileLoader
         tileDict.Add("horBotRight", LoadTile(prefix, "horBotRight"));
         tileDict.Add("horBotLeft", LoadTile(prefix, "horBotLeft"));
 
+        tileDict.Add("vertTopRight", LoadTile(prefix, "vertTopRight"));
+        tileDict.Add("vertTopLeft", LoadTile(prefix, "vertTopLeft"));
+        tileDict.Add("vertBotRight", LoadTile(prefix, "vertBotRight"));
+        tileDict.Add("vertBotLeft", LoadTile(prefix, "vertBotLeft"));
+
         tileDict.Add("left", LoadTile(prefix, "left"));
         tileDict.Add("right", LoadTile(prefix, "right"));
         tileDict.Add("bot", LoadTile(prefix, "bot"));
