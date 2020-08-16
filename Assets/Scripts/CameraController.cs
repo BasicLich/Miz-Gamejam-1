@@ -23,6 +23,11 @@ public class CameraController : MonoBehaviour
     public float cameraBoxWidth = 16.0f;
     public float cameraBoxHeight = 9.0f;
 
+    void Start()
+    {
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+    }
+
     // Update is called once per frame
     void Update()
     {
