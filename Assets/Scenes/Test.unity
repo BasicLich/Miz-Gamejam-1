@@ -537,7 +537,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad967350b82298f43896b5a71b8c16ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 2143300937}
+  player: {fileID: 1798872005}
+  chaseSpeedOffset: 1
+  accelerationTime: 1
   cameraBoxWidth: 4
   cameraBoxHeight: 2.75
 --- !u!1 &1698295390
@@ -622,11 +624,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &2143300937 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5349054364144735072, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
+--- !u!114 &1798872005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5349054364144735073, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
   m_PrefabInstance: {fileID: 5349054365918936617}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e162567cdac23604fae8349c9f7a739c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &2143300939 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 5349054364144735074, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
@@ -743,6 +751,14 @@ PrefabInstance:
     - target: {fileID: 5349054364144735072, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5349054364144735072, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5349054364144735072, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5349054364144735086, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
       propertyPath: m_Name

@@ -6,7 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WeaponController : MonoBehaviour
+public class WeaponController : AbsWeaponController
 {
     Vector3 lookingAt;
     public Transform playerTransform;
@@ -25,7 +25,7 @@ public class WeaponController : MonoBehaviour
         meleeAttackTarget = transform.position;
     }
 
-    public void Look(InputAction.CallbackContext context)
+    public override void Look(InputAction.CallbackContext context)
     {
         Vector2 mousePos = context.ReadValue<Vector2>();
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -38,7 +38,7 @@ public class WeaponController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, zRot);
     }
 
-    public void Fire(InputAction.CallbackContext context)
+    public override void Fire(InputAction.CallbackContext context)
     {
         if (meleeAttackCountdown >= meleeAttackCoolDown && context.performed)
         {
@@ -55,20 +55,23 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
-        if (meleeAttackCountdown < meleeAttackSpeed)
+        if (meleeAttackCountdown < meleeAttackCoolDown)
         {
-            meleeAttackFraction += Time.deltaTime / meleeAttackSpeed;
-            transform.position = Vector2.Lerp(transform.position, meleeAttackTarget, meleeAttackFraction);
-            if (meleeAttackCountdown + Time.deltaTime >= meleeAttackSpeed)
+            if (meleeAttackCountdown < meleeAttackSpeed)
             {
-                meleeAttackFraction = 0;
+                meleeAttackFraction += Time.deltaTime / meleeAttackSpeed;
+                transform.position = Vector2.Lerp(transform.position, meleeAttackTarget, meleeAttackFraction);
+                if (meleeAttackCountdown + Time.deltaTime >= meleeAttackSpeed)
+                {
+                    meleeAttackFraction = 0;
+                }
             }
+            else
+            {
+                meleeAttackFraction += Time.deltaTime / meleeAttackSpeed;
+                transform.position = Vector2.Lerp(transform.position, playerTransform.position, meleeAttackFraction);
+            }
+            meleeAttackCountdown += Time.deltaTime;
         }
-        else
-        {
-            meleeAttackFraction += Time.deltaTime / meleeAttackSpeed;
-            transform.position = Vector2.Lerp(transform.position, playerTransform.position, meleeAttackFraction);
-        }
-        meleeAttackCountdown += Time.deltaTime;
     }
 }

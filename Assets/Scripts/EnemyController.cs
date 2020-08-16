@@ -41,6 +41,8 @@ public class EnemyController : MonoBehaviour
         {
 
             RaycastHit2D hit = Physics2D.Raycast(position, temp, visionRange);
+            Debug.DrawLine(transform.position, hit.point);
+
             if (hit.collider == playerCollider)
             {
                 playerSighted = true;
@@ -63,11 +65,13 @@ public class EnemyController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
+        //return;
         //Gizmos.DrawLine(transform.position, transform.position + new Vector3(lookDir.x, lookDir.y).normalized * visionRange);
         Vector2 left = (Quaternion.Euler(0, 0, fieldOfView / 2.0f) * lookDir); 
         Vector2 right = (Quaternion.Euler(0, 0, -fieldOfView / 2.0f) * lookDir);
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(left.x, left.y).normalized * visionRange);
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(right.x, right.y).normalized * visionRange);
+        Debug.DrawRay(transform.position, new Vector3(left.x, left.y, 0).normalized * visionRange);
+        //Gizmos.DrawLine(transform.position, transform.position + new Vector3(left.x, left.y).normalized * visionRange);
+        Debug.DrawRay(transform.position, new Vector3(right.x, right.y, 0).normalized * visionRange);
 
         float stepX = (left.x - right.x) / visionFidelity;
         float stepY = (left.y - right.y) / visionFidelity;
@@ -76,7 +80,7 @@ public class EnemyController : MonoBehaviour
 
         for (int i = 0; i < visionFidelity; i++)
         {
-            Gizmos.DrawLine(transform.position, transform.position + new Vector3(temp.x, temp.y).normalized * visionRange);
+            Debug.DrawRay(transform.position, (new Vector3(temp.x, temp.y, 0).normalized * visionRange), Color.red);
             temp.x += stepX;
             temp.y += stepY;
         }
