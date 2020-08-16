@@ -10,10 +10,10 @@ public class GenComponent : MonoBehaviour
     public Tilemap room;
     public RoomDigger digger;
     public Vector2Int roomSize, corridorLength, maxSize, roomCount;
-    public int tries;
+    public int tries, corridorWidth;
     public void GenAndRender() {
         digger = new RoomDigger();
-        TileBase[,] hey = digger.TryMakeRoom(roomSize, corridorLength, maxSize, roomCount, tries);
+        TileBase[,] hey = digger.TryMakeRoom(roomSize, corridorLength, maxSize, roomCount, tries, corridorWidth);
         RenderTiles(hey);
     }
 

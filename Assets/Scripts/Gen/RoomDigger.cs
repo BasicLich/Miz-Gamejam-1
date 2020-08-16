@@ -31,16 +31,18 @@ public class RoomDigger
     Vector2Int roomSize = new Vector2Int(6,10);
     Vector2Int maxSize = new Vector2Int(64, 64);
     Vector2Int roomCount;
+    int corridorWidth;
     TileBase placeholder = TileLoader.LoadTile("Tiles/Color/", "placeholder");
     System.Random random = new System.Random();
     // Array dirs = Enum.GetValues(typeof(Dir));
 
-    public TileBase[,] TryMakeRoom(Vector2Int roomSize, Vector2Int corridorSize, Vector2Int maxSize, Vector2Int roomCount, int tries)
+    public TileBase[,] TryMakeRoom(Vector2Int roomSize, Vector2Int corridorSize, Vector2Int maxSize, Vector2Int roomCount, int tries, int corridorWidth)
     {
         this.roomSize = roomSize;
         this.corridorSize = corridorSize;
         this.maxSize = maxSize;
         this.roomCount = roomCount;
+        this.corridorWidth = corridorWidth;
 
 
         TileBase[,] roomTiles = new TileBase[0,0];
@@ -131,10 +133,9 @@ public class RoomDigger
         return (a.Contains(new Vector2(b.xMin, b.yMin)) && a.Contains(new Vector2(b.xMax, b.yMax)));
     }
 
-    public TileBase[,] GenBigRoom(TileBase[,] roomTiles, Vector2Int pos, Dir dir) // Pass in room params as obj?
+    public TileBase[,] GenBigRoom(TileBase[,] roomTiles, Vector2Int pos, Dir dir)
     {
         // ROOM GEN
-        // XXX: Check if collides with corridors?
         int subRoomWidth = random.Next(roomSize.x, roomSize.y);
         int subRoomHeight = random.Next(roomSize.x, roomSize.y);
         Rect subRoomRect = findRoomRect(pos, subRoomWidth, subRoomHeight, dir);
@@ -263,13 +264,13 @@ public class RoomDigger
         {
             case Dir.LEFT:
             case Dir.RIGHT:
-                corridor = new TileBase[Math.Abs(corridorEnd.x - corridorStart.x), 3];
+                corridor = new TileBase[Math.Abs(corridorEnd.x - corridorStart.x), 2 + corridorWidth];
                 hor = true;
                 break;
 
             case Dir.UP:
             case Dir.DOWN:
-                corridor = new TileBase[3, Math.Abs(corridorEnd.y - corridorStart.y)];
+                corridor = new TileBase[2 + corridorWidth, Math.Abs(corridorEnd.y - corridorStart.y)];
                 hor = false;
                 break;
             default:
@@ -282,39 +283,39 @@ public class RoomDigger
 
         if (hor)
             for (int x = 0; x < width; x++)
-                for (int y = 0; y < 3; y++)
+                for (int y = 0; y < 2 + corridorWidth; y++)
                     if (x == 0)
                     {
                         if (y == 0) corridor[x,y] = tileDict["horBotLeft"];
-                        else if (y == 2) corridor[x,y] = tileDict["horTopLeft"];
+                        else if (y == 1 + corridorWidth) corridor[x,y] = tileDict["horTopLeft"];
                     }
                     else if (x == width - 1)
                     {
                         if (y == 0) corridor[x,y] = tileDict["horBotRight"];
-                        else if (y == 2) corridor[x,y] = tileDict["horTopRight"];
+                        else if (y == 1 + corridorWidth) corridor[x,y] = tileDict["horTopRight"];
                     }
                     else
                     {
                         if (y == 0) corridor[x,y] = tileDict["top"];
-                        else if (y == 2) corridor[x,y] = tileDict["bot"];
+                        else if (y == 1 + corridorWidth) corridor[x,y] = tileDict["bot"];
                     }
         else
-            for (int x = 0; x < 3; x++)
+            for (int x = 0; x < 2 + corridorWidth; x++)
                 for (int y = 0; y < height; y++)
                     if (y == 0)
                     {
                         if (x == 0) corridor[x,y] = tileDict["vertBotLeft"];
-                        else if (x == 2) corridor[x,y] = tileDict["vertBotRight"];
+                        else if (x == 1 + corridorWidth) corridor[x,y] = tileDict["vertBotRight"];
                     }
                     else if (y == height - 1)
                     {
                         if (x == 0) corridor[x,y] = tileDict["vertTopLeft"];
-                        else if (x == 2) corridor[x,y] = tileDict["vertTopRight"];
+                        else if (x == 1 + corridorWidth) corridor[x,y] = tileDict["vertTopRight"];
                     }
                     else
                     {
                         if (x == 0) corridor[x,y] = tileDict["right"];
-                        else if (x == 2) corridor[x,y] = tileDict["left"];
+                        else if (x == 1 + corridorWidth) corridor[x,y] = tileDict["left"];
                     }
 
                 
@@ -361,10 +362,6 @@ public class RoomDigger
                 {
                     room[x, y] = tileDict["right"];
                 }
-                // else
-                // {
-                //     room[x, y] = tileDict["floor"];
-                // }
             }
         return room;
     }
