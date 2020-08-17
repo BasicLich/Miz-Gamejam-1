@@ -11,11 +11,9 @@ public class CameraController : MonoBehaviour
     bool chasingPlayer = false;
     public float chaseSpeedOffset = 1.0f; // How much faster or slower is the camera?
     public float accelerationTime = 1.0f; // How many seconds does it take for the camera to reach max speed?
-    public float decelerationTime = 0.5f; // How many seconds does it take for the camera to reach max speed?
+    public float decelerationTime = 0.5f; // How many seconds does it take for the camera to slow down to a crawl?
     
-    [SerializeReference]
     float acceleration = 0.0f;
-    [SerializeField]
     float deceleration = 0.0f;
     Vector3 velocity = new Vector3();
 
