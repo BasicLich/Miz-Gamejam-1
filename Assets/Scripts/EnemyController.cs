@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using UnityEditor;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -10,7 +9,13 @@ public class EnemyController : MonoBehaviour
     public float visionRange = 20.0f;
     public int visionFidelity = 10;
     public BoxCollider2D playerCollider;
+    bool playerSighted = false;
+
     public float moveSpeed = 4.0f;
+
+    public bool debug = false;
+
+    public float FoVRad { get{ return fieldOfView * Mathf.Deg2Rad; }}
 
     Vector3 lastPlayerLocation;
 
@@ -19,29 +24,32 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        lastPlayerLocation = transform.position;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void FindPlayer()
     {
+        playerSighted = false;
         lookDir = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z) * new Vector2(1, 0);
         Vector2 left = (Quaternion.Euler(0, 0, fieldOfView / 2.0f) * lookDir);
         Vector2 right = (Quaternion.Euler(0, 0, -fieldOfView / 2.0f) * lookDir);
 
-        float stepX = (left.x - right.x) / visionFidelity;
-        float stepY = (left.y - right.y) / visionFidelity;
+        //float stepX = (left.x - right.x) / visionFidelity;
+        //float stepY = (left.y - right.y) / visionFidelity;
 
-        Vector2 temp = right;
+        Vector3 temp;
 
         Vector2 position = transform.position;
-        bool playerSighted = false;
-        
+        float radOffset = Mathf.Atan2(right.y, right.x);
+
         for (int i = 0; i < visionFidelity; i++)
         {
 
-            RaycastHit2D hit = Physics2D.Raycast(position, temp, visionRange);
-            Debug.DrawLine(transform.position, hit.point);
+            float dir = Random.Range(0, 1.0f) * FoVRad + radOffset;
+            temp = new Vector3(visionRange * Mathf.Cos(dir), visionRange * Mathf.Sin(dir), 0);
+            RaycastHit2D hit = Physics2D.Raycast(position, temp.normalized, visionRange);
+            //Debug.Log(temp);
+            if (debug) Debug.DrawRay(transform.position, temp.normalized * visionRange, Color.blue);
 
             if (hit.collider == playerCollider)
             {
@@ -50,13 +58,19 @@ public class EnemyController : MonoBehaviour
                 break;
             }
 
-            temp.x += stepX;
-            temp.y += stepY;
+            //temp.x += stepX;
+            //temp.y += stepY;
         }
-        if (playerSighted)
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        FindPlayer();
+        Vector3 target = (lastPlayerLocation - transform.position);
+        if (playerSighted || target.magnitude > 0.1f)
         {
-            Vector3 target = (lastPlayerLocation - transform.position).normalized;
-            transform.position += target * moveSpeed * Time.deltaTime;
+            transform.position += target.normalized * moveSpeed * Time.deltaTime;
 
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg);
         }
@@ -64,25 +78,27 @@ public class EnemyController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        return;
         Gizmos.color = Color.red;
         //return;
         //Gizmos.DrawLine(transform.position, transform.position + new Vector3(lookDir.x, lookDir.y).normalized * visionRange);
         Vector2 left = (Quaternion.Euler(0, 0, fieldOfView / 2.0f) * lookDir); 
         Vector2 right = (Quaternion.Euler(0, 0, -fieldOfView / 2.0f) * lookDir);
-        Debug.DrawRay(transform.position, new Vector3(left.x, left.y, 0).normalized * visionRange);
+        Gizmos.DrawRay(transform.position, new Vector3(left.x, left.y, 0).normalized * visionRange);
         //Gizmos.DrawLine(transform.position, transform.position + new Vector3(left.x, left.y).normalized * visionRange);
-        Debug.DrawRay(transform.position, new Vector3(right.x, right.y, 0).normalized * visionRange);
+        Gizmos.DrawRay(transform.position, new Vector3(right.x, right.y, 0).normalized * visionRange);
 
-        float stepX = (left.x - right.x) / visionFidelity;
-        float stepY = (left.y - right.y) / visionFidelity;
-
+        float radOffset = Mathf.Atan2(right.y, right.x);
+        
         Vector2 temp = right;
 
         for (int i = 0; i < visionFidelity; i++)
         {
-            Debug.DrawRay(transform.position, (new Vector3(temp.x, temp.y, 0).normalized * visionRange), Color.red);
-            temp.x += stepX;
-            temp.y += stepY;
+            float dir = Random.Range(0, 1.0f) * FoVRad + radOffset;
+            temp = new Vector2(Mathf.Cos(dir), Mathf.Sin(dir));
+            Gizmos.DrawRay(transform.position, (new Vector3(temp.x, temp.y, 0).normalized * visionRange));
+            //temp.x += stepX;
+            //temp.y += stepY;
         }
     }
 }
