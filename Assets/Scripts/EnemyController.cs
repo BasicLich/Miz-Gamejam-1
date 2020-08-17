@@ -85,4 +85,17 @@ public class EnemyController : MonoBehaviour
             temp.y += stepY;
         }
     }
+
+    // void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.tag == "AttackingMeleeWeapon") Die();
+    // }
+    void OnCollisionEnter2D(Collision2D collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag == "Projectile") Die();
+    }
+
+    public void Die() {
+        Destroy(gameObject);
+    }
 }

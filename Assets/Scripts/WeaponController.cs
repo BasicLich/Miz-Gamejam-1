@@ -11,10 +11,10 @@ public class WeaponController : AbsWeaponController
     Vector3 lookingAt;
     public Transform playerTransform;
 
-    public  float meleeAttackSpeed = 0.2f; // Number of seconds a melee attack takes to reach apex.
+    public float meleeAttackSpeed = 0.2f; // Number of seconds a melee attack takes to reach apex.
 
-    public  float meleeAttackCoolDown = 0.5f;
-            float meleeAttackCountdown = 0.5f;
+    public float meleeAttackCoolDown = 0.5f;
+    float meleeAttackCountdown = 0.5f;
     public float meleeRange = 10.0f;
     float meleeAttackFraction = 1.0f;
 
