@@ -52,9 +52,4 @@ public class AbsEnemyController : MonoBehaviour
             //temp.y += stepY;
         }
     }
-
-    public void Die()
-    {
-        Destroy(gameObject);
-    }
 }
