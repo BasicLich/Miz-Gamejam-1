@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - CoinCounter
+  - Enemy
+  - Projectile
+  - MeleeWeapon
   layers:
   - Default
   - TransparentFX

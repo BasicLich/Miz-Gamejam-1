@@ -106,11 +106,6 @@ public class EnemyController : MonoBehaviour
     // {
     //     if (other.gameObject.tag == "AttackingMeleeWeapon") Die();
     // }
-    void OnCollisionEnter2D(Collision2D collisionInfo)
-    {
-        if (collisionInfo.gameObject.tag == "Projectile") Die();
-    }
-
     public void Die() {
         Destroy(gameObject);
     }

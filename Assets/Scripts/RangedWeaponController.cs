@@ -7,8 +7,6 @@ public class RangedWeaponController : AbsWeaponController
 {
     public GameObject projectile;
     Vector3 lookingAt;
-    public Transform playerTransform;
-
     public  float meleeAttackSpeed = 0.2f; // Number of seconds a melee attack takes to reach apex.
 
     public  float rangedAttackCoolDown = 0.5f;

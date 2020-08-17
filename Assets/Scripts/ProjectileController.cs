@@ -24,8 +24,11 @@ public class ProjectileController : MonoBehaviour
         rigidbody2d.velocity = Vector3.zero;
         Destroy(rigidbody2d);
         Destroy(collider2d);
-        if (collisionInfo.gameObject.tag == "Enemy") selfDestructTimer = 0.0f;
-
+        if (collisionInfo.gameObject.tag == "Enemy") {
+            selfDestructTimer = 0.0f;
+            EnemyController enemy = collisionInfo.gameObject.GetComponent<EnemyController>();
+            enemy.Die();
+        };
         Destroy(gameObject, selfDestructTimer);
     }
 }

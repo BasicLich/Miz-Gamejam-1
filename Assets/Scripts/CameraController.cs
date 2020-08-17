@@ -29,8 +29,9 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
         //transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, transform.position.z);
-        var position = transform.position;
+        // var position = transform.position;
 
         //if (player.transform.position.x < position.x - cameraBoxWidth && !chasingPlayer)
         //{
@@ -49,40 +50,40 @@ public class CameraController : MonoBehaviour
         //{
         //    position.y = player.transform.position.y - cameraBoxHeight;
         //}
-        if (isPlayerOutsideCameraBox() && !chasingPlayer)
-        {
-            StartChase();
-        }
+        // if (isPlayerOutsideCameraBox() && !chasingPlayer)
+        // {
+        //     StartChase();
+        // }
 
         //transform.position = position;
-        if (chasingPlayer)
-        {
-            Vector2 distanceVector = player.transform.position - transform.position;
+        // if (chasingPlayer)
+        // {
+        //     Vector2 distanceVector = player.transform.position - transform.position;
 
-            if (acceleration < 1.0f)
-            {
-                acceleration += Time.deltaTime / accelerationTime;
-            }
-            if (distanceVector.magnitude < 2.0f)
-            {
-                if (deceleration >= 1.0f)
-                {
-                    chasingPlayer = false;
-                    velocity = new Vector3();
-                } else
-                {
-                    deceleration += Time.deltaTime / decelerationTime;
-                    velocity = distanceVector.normalized * Mathf.Lerp(player.moveSpeed + chaseSpeedOffset, 0.0f, deceleration);
-                }
-            }
-            else
-            {
-                transform.position = position + velocity * Time.deltaTime;
-                velocity = distanceVector.normalized * Mathf.Lerp(0.0f, player.moveSpeed + chaseSpeedOffset, acceleration);
-                velocity.z = 0.0f;
-            }
-            transform.position = position + velocity * Time.deltaTime;
-        }
+        //     if (acceleration < 1.0f)
+        //     {
+        //         acceleration += Time.deltaTime / accelerationTime;
+        //     }
+        //     if (distanceVector.magnitude < 2.0f)
+        //     {
+        //         if (deceleration >= 1.0f)
+        //         {
+        //             chasingPlayer = false;
+        //             velocity = new Vector3();
+        //         } else
+        //         {
+        //             deceleration += Time.deltaTime / decelerationTime;
+        //             velocity = distanceVector.normalized * Mathf.Lerp(player.moveSpeed + chaseSpeedOffset, 0.0f, deceleration);
+        //         }
+        //     }
+        //     else
+        //     {
+        //         transform.position = position + velocity * Time.deltaTime;
+        //         velocity = distanceVector.normalized * Mathf.Lerp(0.0f, player.moveSpeed + chaseSpeedOffset, acceleration);
+        //         velocity.z = 0.0f;
+        //     }
+        //     transform.position = position + velocity * Time.deltaTime;
+        // }
     }
 
     void StartChase()

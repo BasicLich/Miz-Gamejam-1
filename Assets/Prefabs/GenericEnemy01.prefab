@@ -132,6 +132,7 @@ MonoBehaviour:
   visionFidelity: 40
   playerCollider: {fileID: 0}
   moveSpeed: 4
+  debug: 0
   lookDir: {x: 1, y: 0}
 --- !u!61 &4979545956147696041
 BoxCollider2D:
