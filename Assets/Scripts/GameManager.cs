@@ -3,10 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameStateController : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
+    private static GameManager instance;
+    public static GameManager Instance { get { return instance; } }
     public Text ValueText;
     public int Value { get; set; }
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     private void Start()
     {
@@ -23,5 +37,10 @@ public class GameStateController : MonoBehaviour
     {
         Value += value;
         ValueText.text = Value.ToString();
+    }
+
+    public void InitializeGUI()
+    {
+        
     }
 }

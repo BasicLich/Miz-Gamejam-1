@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CoinController : MonoBehaviour
 {
-    public GameStateController gameState;
     public int value = 5;
     public Text valueText;
 
@@ -16,10 +15,6 @@ public class CoinController : MonoBehaviour
 
     private void Start()
     {
-        if (gameState == null)
-        {
-            gameState = Component.FindObjectOfType<GameStateController>();
-        }
         SetSprite();
     }
 
@@ -28,7 +23,7 @@ public class CoinController : MonoBehaviour
         if (collision.tag == "Player")
         {
             Debug.Log("Coin Pickup!");
-            gameState.AddValue(value);
+            GameManager.Instance.AddValue(value);
             Destroy(gameObject);
         }
     }

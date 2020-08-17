@@ -92,6 +92,7 @@ public class SwordController : AbsWeaponController
     {
         if (other.gameObject.tag == "Enemy" && attacking)
         {
+            Debug.Log("Whack!");
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
             enemy.Die();
         }
