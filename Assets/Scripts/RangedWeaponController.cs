@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RangedWeaponController : MonoBehaviour
+public class RangedWeaponController : AbsWeaponController
 {
+    public GameObject projectile;
     Vector3 lookingAt;
     public Transform playerTransform;
 
@@ -22,7 +23,7 @@ public class RangedWeaponController : MonoBehaviour
         rangedAttackTarget = transform.position;
     }
 
-    public void Look(InputAction.CallbackContext context)
+    public override void Look(InputAction.CallbackContext context)
     {
         Vector2 mousePos = context.ReadValue<Vector2>();
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -35,22 +36,18 @@ public class RangedWeaponController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, zRot);
     }
 
-    public void Fire(InputAction.CallbackContext context)
+    public override void Fire(InputAction.CallbackContext context)
     {
-        if (rangedAttackCountdown >= rangedAttackCoolDown && context.performed)
-        {
-            DoRanged();
-            rangedAttackCountdown = 0.0f;
+        if (context.performed)
+        { 
+            ShootProjectile();
+            Instantiate(projectile, transform.position, transform.rotation);
         }
     }
 
-    public void DoRanged()
+    public void ShootProjectile()
     {
         rangedAttackTarget = transform.position + lookingAt * meleeRange;
         meleeAttackFraction = 0;
-    }
-
-    private void Update()
-    {
     }
 }
