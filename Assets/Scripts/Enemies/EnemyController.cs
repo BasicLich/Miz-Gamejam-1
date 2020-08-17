@@ -23,6 +23,10 @@ public class EnemyController : AbsEnemyController
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg);
         }
     }
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
     //private void OnDrawGizmos()
     //{
     //    return;
@@ -36,7 +40,7 @@ public class EnemyController : AbsEnemyController
     //    Gizmos.DrawRay(transform.position, new Vector3(right.x, right.y, 0).normalized * visionRange);
 
     //    float radOffset = Mathf.Atan2(right.y, right.x);
-        
+
     //    Vector2 temp = right;
 
     //    for (int i = 0; i < visionFidelity; i++)
