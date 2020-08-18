@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
     public Text ValueText;
-    public int Value { get; set; }
     public DungeonController dungeonController;
 
     // dungeonFloors = DungeonGenerator.generateFloors(random parameters, 3)
@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
         // scenetransition to dungeon scene
     }
 
+    private int value;
+    public int Value { get { return value; } set { this.value = value; } }
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -30,7 +33,7 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
-            dungeonController = new DungeonController();
+            GameObject.DontDestroyOnLoad(gameObject);
         }
     }
 
