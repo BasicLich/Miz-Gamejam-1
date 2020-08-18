@@ -26,11 +26,18 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody2d.velocity = velocity;
         moveAnim();
+        // GameManager.Instance.dungeonController.checkRoom(transform.position);
     }
 
     public void SetMovement(InputAction.CallbackContext context)
     {
         velocity = context.ReadValue<Vector2>() * moveSpeed;
+    }
+
+    public void ascendStaircase()
+    {
+        // GameManager.Instance.dungeonController.nextFloor();
+        // transform.position = GameManager.Instance.dungeonController.getFloorStart();
     }
 
     private bool isMoving()

@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Rect getRekt = GameManager.Instance.dungeonController.getActiveRoomRect();
         transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
         //transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, transform.position.z);
         // var position = transform.position;

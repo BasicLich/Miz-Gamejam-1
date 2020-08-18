@@ -27,7 +27,7 @@ public class RoomDigger
     public List<Rect> corridors;
     public Rect tempCorridor;
 
-    Vector2Int corridorSize = new Vector2Int(4,15);
+    Vector2Int corridorLength = new Vector2Int(4,15);
     Vector2Int roomSize = new Vector2Int(6,10);
     Vector2Int maxSize = new Vector2Int(64, 64);
     Vector2Int roomCount;
@@ -36,24 +36,24 @@ public class RoomDigger
     System.Random random = new System.Random();
     // Array dirs = Enum.GetValues(typeof(Dir));
 
-    public TileBase[,] TryMakeRoom(Vector2Int roomSize, Vector2Int corridorSize, Vector2Int maxSize, Vector2Int roomCount, int tries, int corridorWidth)
+    public TileBase[,] MakeDungeonFloor(DungeonParams dungeonParams)
     {
-        this.roomSize = roomSize;
-        this.corridorSize = corridorSize;
-        this.maxSize = maxSize;
-        this.roomCount = roomCount;
-        this.corridorWidth = corridorWidth;
+        this.roomSize = dungeonParams.roomSize;
+        this.corridorLength = dungeonParams.corridorLength;
+        this.maxSize = dungeonParams.maxSize;
+        this.roomCount = dungeonParams.roomCount;
+        this.corridorWidth = dungeonParams.corridorWidth;
 
 
         TileBase[,] roomTiles = new TileBase[0,0];
-        while (tries != 0)
+        while (dungeonParams.tries != 0)
         { 
             tempCorridor = Rect.zero;
             rooms = new List<Rect>();
             corridors = new List<Rect>();
             roomTiles = GenBigRoom(new TileBase[maxSize.x, maxSize.y], new Vector2Int(roomSize.y, roomSize.y), Dir.RIGHT);
             if (rooms.Count < roomCount.x) {
-                tries--;
+                dungeonParams.tries--;
                 continue;
             };
             return roomTiles;
@@ -207,8 +207,8 @@ public class RoomDigger
             }
 
             // Find corridorEnd
-            int corridorLength = random.Next(corridorSize.x, corridorSize.y);
-            Vector2Int corridorEnd = corridorStart + directions[newDir] * corridorLength;
+            int corridorTileLength = random.Next(corridorLength.x, corridorLength.y);
+            Vector2Int corridorEnd = corridorStart + directions[newDir] * corridorTileLength;
 
             // FIXME: We build the corridor early to construct the rect for collision detection
             // Rect construction should be decoupled from buildCorridor

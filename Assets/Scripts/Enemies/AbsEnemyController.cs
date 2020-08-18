@@ -16,6 +16,10 @@ public class AbsEnemyController : MonoBehaviour
     public bool debug = false;
     public float moveSpeed = 4.0f;
 
+    protected void Start()
+    {
+        playerCollider = GameObject.FindWithTag("Player").GetComponent<BoxCollider2D>();
+    }
 
     protected void FindPlayer()
     {

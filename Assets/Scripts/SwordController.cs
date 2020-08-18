@@ -47,6 +47,7 @@ public class SwordController : AbsWeaponController
         if (context.performed)
         {
             DoMelee();
+            GameManager.Instance.transitionToDungeonScene();
         }
     }
 
