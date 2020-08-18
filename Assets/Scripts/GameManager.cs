@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
+            dungeonController = new DungeonController();
             GameObject.DontDestroyOnLoad(gameObject);
         }
     }
