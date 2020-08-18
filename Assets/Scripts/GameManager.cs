@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
     public Text ValueText;
-    public int Value { get; set; }
+
+    private int value;
+    public int Value { get { return value; } set { this.value = value; } }
 
     private void Awake()
     {
