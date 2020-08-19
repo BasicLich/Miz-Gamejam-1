@@ -146,6 +146,10 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1385984338}
+    - target: {fileID: 8540061823676927816, guid: 6b737aa33831cf244b9459d1d06478f6, type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 4685595251901331543, guid: eedc687f8ae43d64493026512b112d99, type: 3}
     - target: {fileID: 8540061823676927817, guid: 6b737aa33831cf244b9459d1d06478f6, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -3722,7 +3726,7 @@ Transform:
   - {fileID: 584468454}
   - {fileID: 2040286941}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &494078356
 MonoBehaviour:
@@ -3924,7 +3928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7836407715581733078, guid: fa90bdb1b848bcb4eb36dcb33c070fa1, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7836407715581733078, guid: fa90bdb1b848bcb4eb36dcb33c070fa1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3951,10 +3955,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 832231345, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1179278011, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
       propertyPath: equippedWeapon
       value: 
       objectReference: {fileID: 1563323672}
+    - target: {fileID: 1959895491, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5349054364144735072, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.99
@@ -3985,7 +3997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5349054364144735072, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5349054364144735072, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3999,6 +4011,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5349054364144735073, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
+      propertyPath: rigidbody2d
+      value: 
+      objectReference: {fileID: 1226984800}
     - target: {fileID: 5349054364144735086, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4016,6 +4032,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e162567cdac23604fae8349c9f7a739c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &1226984800 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5349054364144735077, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
+  m_PrefabInstance: {fileID: 1226984798}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1341139058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4053,7 +4074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7961236611091364900, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7961236611091364900, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4067,9 +4088,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7961236611091364901, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}
+      propertyPath: BypassEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961236611091364901, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961236611091364901, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7961236611091364902, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}
       propertyPath: m_Name
       value: Spooky Music Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961236611091364902, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}

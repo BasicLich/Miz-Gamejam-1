@@ -8,6 +8,7 @@ public class SwordController : AbsWeaponController
 
     Vector3 lookingAt;
     public Transform playerTransform;
+    AudioSource hitSound;
 
     public float attackTime = 0.2f; // Number of seconds a melee attack takes to complete
 
@@ -23,7 +24,15 @@ public class SwordController : AbsWeaponController
 
     void Start()
     {
-       attackCooldown = attackTime;
+        attackCooldown = attackTime;
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "Sound")
+            {
+                hitSound = child.GetComponent<AudioSource>();
+                break;
+            }
+        }
     }
 
 
@@ -47,8 +56,9 @@ public class SwordController : AbsWeaponController
     {
         if (context.performed)
         {
+            hitSound.Play();
             DoMelee();
-            //GameManager.Instance.transitionToDungeonScene();
+            // GameManager.Instance.transitionToDungeonScene();
         }
     }
 
