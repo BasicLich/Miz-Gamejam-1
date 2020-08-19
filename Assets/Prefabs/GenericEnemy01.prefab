@@ -134,7 +134,7 @@ MonoBehaviour:
   playerCollider: {fileID: 0}
   rigidbody2d: {fileID: 0}
   debug: 0
-  moveSpeed: 90
+  moveSpeed: 4
 --- !u!61 &4979545956147696041
 BoxCollider2D:
   m_ObjectHideFlags: 0

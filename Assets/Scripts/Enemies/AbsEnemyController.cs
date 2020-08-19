@@ -9,8 +9,11 @@ public class AbsEnemyController : MonoBehaviour
     public int visionFidelity = 10;
     public BoxCollider2D playerCollider;
     public Rigidbody2D rigidbody2d;
+    [SerializeField]
     protected bool playerSighted = false;
     public float FoVRad { get { return fieldOfView * Mathf.Deg2Rad; } }
+
+    [SerializeField]
     protected Vector3 lastPlayerLocation;
     protected Vector2 lookDir = new Vector2(1, 0);
 

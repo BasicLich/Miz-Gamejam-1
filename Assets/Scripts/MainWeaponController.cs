@@ -15,10 +15,12 @@ public class MainWeaponController : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
+        if (equippedWeapon == null) return;
         equippedWeapon.Fire(context);
     }
     public void Look(InputAction.CallbackContext context)
     {
+        if (equippedWeapon == null) return;
         equippedWeapon.Look(context);
     }
 }
