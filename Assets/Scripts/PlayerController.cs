@@ -40,6 +40,11 @@ public class PlayerController : MonoBehaviour
         // transform.position = GameManager.Instance.dungeonController.getFloorStart();
     }
 
+    public void DungeonButton()
+    {
+        Debug.Log("test!");
+    }
+
     private bool isMoving()
     {
         return (velocity.x != 0 || velocity.y != 0);

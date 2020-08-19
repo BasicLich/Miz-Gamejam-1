@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyController : AbsEnemyController
 {
+    public Vector3 target;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,12 +16,15 @@ public class EnemyController : AbsEnemyController
     void FixedUpdate()
     {
         FindPlayer();
-        Vector3 target = (lastPlayerLocation - transform.position);
+        target = (lastPlayerLocation - transform.position);
         if (playerSighted || target.magnitude > 0.1f)
         {
             // transform.position += target.normalized * moveSpeed * Time.deltaTime;
-            rigidbody2d.velocity = target.normalized * moveSpeed * Time.deltaTime;
+            rigidbody2d.velocity = target.normalized * moveSpeed;
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg);
+        } else
+        {
+            rigidbody2d.velocity = Vector2.zero;
         }
     }
     public void Die()
