@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 552460708326839655}
   - component: {fileID: 4685595251901331543}
   m_Layer: 0
-  m_Name: HitSound Sword
+  m_Name: HitSound Spear
   m_TagString: Sound
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,10 +41,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b99a65aa2ab759647b780674542c4104, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7440cf522c31e4d40b12eb61e2b9cc47, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.2
-  m_Pitch: 2
+  m_Pitch: 3
   Loop: 0
   Mute: 0
   Spatialize: 0

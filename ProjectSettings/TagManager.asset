@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Projectile
   - MeleeWeapon
+  - Sound
   layers:
   - Default
   - TransparentFX
