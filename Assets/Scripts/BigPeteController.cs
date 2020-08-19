@@ -7,6 +7,8 @@ public class BigPeteController : MonoBehaviour
 {
     public Text bigPeteText;
     public Canvas bigPeteCanvas;
+    public Button bigPeteShopBtn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +32,12 @@ public class BigPeteController : MonoBehaviour
     {
         Debug.Log("HELLO STEALEN! HOW ARE YOU?!");
         bigPeteText.gameObject.SetActive(true);
+        bigPeteShopBtn.gameObject.SetActive(true);
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         bigPeteText.gameObject.SetActive(false);
-
+        bigPeteShopBtn.gameObject.SetActive(false);
     }
 }

@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class EnemyController : AbsEnemyController
 {
-    public Vector3 target;
+
+    public ParticleSystem ps;
+    public SpriteRenderer sr;
+    public BoxCollider2D collider2d;
+    public Rigidbody2D rb;
+
+    bool isDead = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +22,9 @@ public class EnemyController : AbsEnemyController
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (isDead) return;
         FindPlayer();
-        target = (lastPlayerLocation - transform.position);
+        Vector3 target = (lastPlayerLocation - transform.position);
         if (playerSighted || target.magnitude > 0.1f)
         {
             // transform.position += target.normalized * moveSpeed * Time.deltaTime;
@@ -29,7 +37,13 @@ public class EnemyController : AbsEnemyController
     }
     public void Die()
     {
-        Destroy(gameObject);
+        Destroy(sr);
+        Destroy(rb);
+        Destroy(collider2d);
+        //gameObject.GetComponentInChildren<ParticleSystem>().gameObject.SetActive(true);
+        ps.gameObject.SetActive(true);
+        isDead = true;
+        Destroy(gameObject, 1.0f);
     }
     //private void OnDrawGizmos()
     //{
