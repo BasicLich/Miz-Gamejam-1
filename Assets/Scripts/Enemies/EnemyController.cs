@@ -8,7 +8,6 @@ public class EnemyController : AbsEnemyController
     // Start is called before the first frame update
     void Start()
     {
-        base.Start();
         lastPlayerLocation = transform.position;
     }
 
@@ -19,8 +18,8 @@ public class EnemyController : AbsEnemyController
         Vector3 target = (lastPlayerLocation - transform.position);
         if (playerSighted || target.magnitude > 0.1f)
         {
-            transform.position += target.normalized * moveSpeed * Time.deltaTime;
-
+            // transform.position += target.normalized * moveSpeed * Time.deltaTime;
+            rigidbody2d.velocity = target.normalized * moveSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg);
         }
     }
