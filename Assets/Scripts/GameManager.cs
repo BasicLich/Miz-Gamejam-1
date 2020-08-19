@@ -38,20 +38,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if (ValueText != null)
-        {
-            ValueText.text = Value.ToString();
-        } else
-        {
-            Debug.LogError("GameStateController -- ValueText instance not set");
-        }
-    }
 
     public void AddValue(int value)
     {
         Value += value;
+        if (ValueText == null) return;
         ValueText.text = Value.ToString();
     }
 

@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fov: 360
-  rayCount: 100
+  rayCount: 360
   viewDistance: 20
+  forwardRenderer: {fileID: 11400000, guid: cc6df02f894058845901336530400f8e, type: 2}
 --- !u!33 &7836407715581733080
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class FieldOfView : MonoBehaviour
 {
     public float fov = 360.0f;
     public int rayCount = 10;
     public float viewDistance = 20.0f;
+
+    public ForwardRendererData forwardRenderer;
 
     //private MeshFilter filter;
     private Mesh mesh;
@@ -18,6 +21,13 @@ public class FieldOfView : MonoBehaviour
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        forwardRenderer.transparentLayerMask = 0;
+        forwardRenderer.opaqueLayerMask = 0;
+    }
+
+    void OnDestroy()
+    {
+        forwardRenderer.transparentLayerMask = -1;
     }
 
     private void LateUpdate()

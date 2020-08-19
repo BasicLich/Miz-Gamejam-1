@@ -29,6 +29,7 @@ public class SwordController : AbsWeaponController
 
     public override void Look(InputAction.CallbackContext context)
     {
+        if (context.canceled) return;
         Vector2 mousePos = context.ReadValue<Vector2>();
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
         mouseWorldPos.z = transform.position.z;
