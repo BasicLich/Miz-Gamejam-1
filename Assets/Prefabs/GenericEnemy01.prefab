@@ -133,8 +133,14 @@ MonoBehaviour:
   visionFidelity: 40
   playerCollider: {fileID: 0}
   rigidbody2d: {fileID: 0}
+  playerSighted: 0
+  lastPlayerLocation: {x: 0, y: 0, z: 0}
   debug: 0
   moveSpeed: 4
+  ps: {fileID: 0}
+  sr: {fileID: 563594899486682475}
+  collider2d: {fileID: 4979545956147696041}
+  rb: {fileID: 918425784450072652}
 --- !u!61 &4979545956147696041
 BoxCollider2D:
   m_ObjectHideFlags: 0
