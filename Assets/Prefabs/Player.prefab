@@ -169,8 +169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rigidbody2d: {fileID: 0}
-  animSpeed: 0.9
-  animBobHeight: 0.07
+  animSpeed: 0.7
+  animBobHeight: 0.03
 --- !u!50 &5349054364144735077
 Rigidbody2D:
   serializedVersion: 4

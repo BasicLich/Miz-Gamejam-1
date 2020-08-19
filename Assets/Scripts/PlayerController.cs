@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         if (isMoving())
         {
         animTimer += animSpeed;
-        transform.localScale = new Vector3(0.7F, (float)(0.7 - animBobHeight + Math.Abs(animBobHeight * Math.Sin(animTimer/10))), 0.7F);
+        transform.localScale = new Vector3(0.75F, (float)(0.75 - animBobHeight + Math.Abs(animBobHeight * Math.Sin(animTimer/10))), 0.0F);
         }
     }
 }
