@@ -8,6 +8,7 @@ public class AbsEnemyController : MonoBehaviour
     public float visionRange = 20.0f;
     public int visionFidelity = 10;
     public BoxCollider2D playerCollider;
+    public Rigidbody2D rigidbody2d;
     protected bool playerSighted = false;
     public float FoVRad { get { return fieldOfView * Mathf.Deg2Rad; } }
     protected Vector3 lastPlayerLocation;
@@ -16,9 +17,10 @@ public class AbsEnemyController : MonoBehaviour
     public bool debug = false;
     public float moveSpeed = 4.0f;
 
-    protected void Start()
+    void Awake()
     {
         playerCollider = GameObject.FindWithTag("Player").GetComponent<BoxCollider2D>();
+        rigidbody2d = gameObject.GetComponent<Rigidbody2D>();
     }
 
     protected void FindPlayer()
