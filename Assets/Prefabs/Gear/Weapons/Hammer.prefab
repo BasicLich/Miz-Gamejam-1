@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bfbd3c5136c74441be08a0e65b45bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 3
   playerTransform: {fileID: 0}
   attackTime: 0.3
   lungeLength: 0.3

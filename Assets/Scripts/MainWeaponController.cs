@@ -3,14 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class AbsWeaponController : MonoBehaviour, Item
-{
-    public int id;
 
-    public int GetItemId() { return id; }
-    public abstract void Look(InputAction.CallbackContext context);
-    public abstract void Fire(InputAction.CallbackContext context);
-}
 
 public class MainWeaponController : MonoBehaviour
 {

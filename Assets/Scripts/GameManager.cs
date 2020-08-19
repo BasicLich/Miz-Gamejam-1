@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
         // scenetransition to dungeon scene
     }
 
-    private int value;
+    
+    public int value;
     public int Value { get { return value; } set { this.value = value; } }
 
     private void Awake()
@@ -44,6 +45,15 @@ public class GameManager : MonoBehaviour
     public void AddValue(int value)
     {
         Value += value;
+        if (ValueText == null) return;
+        ValueText.text = Value.ToString();
+    }
+
+    public void AddItem(AbsItem item)
+    {
+        if (items.Contains(item.GetItemId())) return;
+        items.Add(item.GetItemId());
+        Value -= item.cost;
         if (ValueText == null) return;
         ValueText.text = Value.ToString();
     }

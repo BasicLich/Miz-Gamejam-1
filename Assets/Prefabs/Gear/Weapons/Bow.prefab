@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88bf72daddd2fc44c9d7035b9a0ef827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 4
+  cost: 100
+  itemName: Bow
   projectile: {fileID: 8580023500525292364, guid: 37a62114d1e9cb74a88e818fa4efff80, type: 3}
-  playerTransform: {fileID: 0}
   meleeAttackSpeed: 0.2
   rangedAttackCoolDown: 0.5
   meleeRange: 10

@@ -154,11 +154,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d506e59be8afc254d812a982256e1610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 2
   playerTransform: {fileID: 0}
   meleeAttackSpeed: 0.1
   meleeAttackCoolDown: 0.2
   meleeRange: 2
-  meleeAttackTarget: {x: 0, y: 0}
+  meleeAttackTarget: {x: 0, y: 0, z: 0}
 --- !u!1001 &5886050376100153320
 PrefabInstance:
   m_ObjectHideFlags: 0
