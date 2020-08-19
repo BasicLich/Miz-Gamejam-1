@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public Text ValueText;
     public DungeonController dungeonController;
 
+    public List<int> items = new List<int>();
+
     // dungeonFloors = DungeonGenerator.generateFloors(random parameters, 3)
 
     public void transitionToDungeonScene()
