@@ -41,18 +41,20 @@ public class FieldOfView : MonoBehaviour
         for (int i = 0; i <= rayCount; i++)
         {
             Vector3 vertex;
+            Vector3 dir = GetVectorFromAngle(angle).normalized;
 
-            var hit = Physics2D.Raycast(origin, GetVectorFromAngle(angle).normalized, viewDistance, LayerMask.GetMask("Default"));
+
+            var hit = Physics2D.Raycast(origin, dir, viewDistance, LayerMask.GetMask("Default"));
 
             if (hit.collider == null)
             {
-                vertex = Vector3.zero + GetVectorFromAngle(angle).normalized * viewDistance;
+                vertex = Vector3.zero + dir * viewDistance;
                 Debug.DrawLine(origin, vertex);
             }
             else
             {
-                vertex = hit.point - new Vector2(origin.x, origin.y);
-                Debug.DrawLine(origin, vertex);
+                vertex = hit.point + new Vector2(dir.x, dir.y) - new Vector2(origin.x, origin.y);
+                Debug.DrawLine(origin, hit.point);
             }
 
             vertices[vertexIndex] = vertex;
