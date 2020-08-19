@@ -6,11 +6,6 @@ using UnityEngine;
 public class EnemyController : AbsEnemyController
 {
 
-    public ParticleSystem ps;
-    public SpriteRenderer sr;
-    public BoxCollider2D collider2d;
-    public Rigidbody2D rb;
-
     bool isDead = false;
 
     // Start is called before the first frame update
@@ -37,13 +32,8 @@ public class EnemyController : AbsEnemyController
     }
     public void Die()
     {
-        Destroy(sr);
-        Destroy(rb);
-        Destroy(collider2d);
-        //gameObject.GetComponentInChildren<ParticleSystem>().gameObject.SetActive(true);
-        ps.gameObject.SetActive(true);
         isDead = true;
-        Destroy(gameObject, 1.0f);
+        Destroy(gameObject);
     }
     //private void OnDrawGizmos()
     //{
