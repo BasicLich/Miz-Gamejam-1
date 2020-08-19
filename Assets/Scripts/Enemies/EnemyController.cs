@@ -8,6 +8,7 @@ public class EnemyController : AbsEnemyController
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         lastPlayerLocation = transform.position;
     }
 

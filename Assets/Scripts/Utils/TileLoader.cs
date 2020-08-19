@@ -53,4 +53,13 @@ public static class TileLoader
 
         return tileDict;
     }
+
+    public static Dictionary<string, TileBase> LoadFloorTiles(string tileset)
+    {
+        Dictionary<string, TileBase> tileDict = new Dictionary<string, TileBase>();
+        string prefix = "Tiles/" + tileset + "/Floor/";
+        tileDict.Add("floor", LoadTile(prefix, "floor1"));
+        return tileDict;
+    }
+
 }

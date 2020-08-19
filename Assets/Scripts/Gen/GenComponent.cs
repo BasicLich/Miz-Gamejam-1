@@ -11,9 +11,11 @@ public class GenComponent : MonoBehaviour
     public RoomDigger digger;
     public Vector2Int roomSize, corridorLength, maxSize, roomCount;
     public int tries, corridorWidth;
+    // DungeonParams params;
     public void GenAndRender() {
         digger = new RoomDigger();
-        TileBase[,] hey = digger.TryMakeRoom(roomSize, corridorLength, maxSize, roomCount, tries, corridorWidth);
+        DungeonParams dungeonParams = new DungeonParams(roomSize, corridorLength, maxSize, roomCount, tries, corridorWidth);
+        TileBase[,] hey = digger.MakeDungeonFloor(dungeonParams);
         RenderTiles(hey);
     }
 
