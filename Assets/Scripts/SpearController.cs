@@ -91,12 +91,13 @@ public class SpearController : AbsWeaponController
         }
     }
 
+    // TODO: Only one enemy hit allowed per animation cycle
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy" && (meleeAttackCountdown < meleeAttackSpeed * 2))
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Enemies" && (meleeAttackCountdown < meleeAttackSpeed * 2))
         {
-            EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
-            enemy.Die();
+            EnemyPlayerColliderController enemy = other.gameObject.GetComponent<EnemyPlayerColliderController>();
+            enemy.HitByPlayer(lookingAt.normalized * 16, 1);
         }
     }
 }

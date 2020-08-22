@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - MeleeWeapon
   - Sound
+  - PlayerCollider
   layers:
   - Default
   - TransparentFX

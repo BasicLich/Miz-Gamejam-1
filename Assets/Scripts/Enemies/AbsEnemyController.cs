@@ -23,6 +23,7 @@ public class AbsEnemyController : MonoBehaviour
 
     int frameCounter = 0;
     public int framesBetweenLook = 4;
+    string[] layerMask = {"Default", "Player"};
 
     void Awake()
     {
@@ -69,7 +70,7 @@ public class AbsEnemyController : MonoBehaviour
                 Vector3 dir = GetVectorFromAngle(angle).normalized;
 
                 temp = dir * visionRange;// new Vector3(visionRange * Mathf.Cos(dir), visionRange * Mathf.Sin(dir), 0);
-                RaycastHit2D[] hits = Physics2D.RaycastAll(position, temp.normalized, visionRange);
+                RaycastHit2D[] hits = Physics2D.RaycastAll(position, temp.normalized, visionRange, LayerMask.GetMask(layerMask));
 
                 RaycastHit2D hit = (hits.Length > 0) ? hits[0] : new RaycastHit2D();
                 int currentId = 0;
@@ -172,7 +173,7 @@ public class AbsEnemyController : MonoBehaviour
             Vector3 dir = GetVectorFromAngle(angle).normalized;
 
             temp = dir * visionRange;// new Vector3(visionRange * Mathf.Cos(dir), visionRange * Mathf.Sin(dir), 0);
-            RaycastHit2D hit = Physics2D.Raycast(position, temp.normalized, visionRange);
+            RaycastHit2D hit = Physics2D.Raycast(position, temp.normalized, visionRange, LayerMask.GetMask(layerMask));
             //Debug.Log(temp);
             Vector3 pointHit = new Vector3(hit.point.x, hit.point.y, transform.position.z);
             Debug.Log(pointHit);

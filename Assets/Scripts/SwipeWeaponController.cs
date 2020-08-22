@@ -99,12 +99,13 @@ public class SwipeWeaponController : AbsWeaponController
         }
     }
 
+    // TODO: Only one enemy hit allowed per animation cycle
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy" && attacking)
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Enemies" && attacking)
         {
-            EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
-            enemy.Die();
+            EnemyPlayerColliderController enemy = other.gameObject.GetComponent<EnemyPlayerColliderController>();
+            enemy.HitByPlayer(lookingAt.normalized * 16, 1);
         }
     }
 

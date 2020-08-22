@@ -14,6 +14,7 @@ public class FieldOfView : MonoBehaviour
     //private MeshFilter filter;
     private Mesh mesh;
     Transform playerTransform;
+    float jitter = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,8 @@ public class FieldOfView : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (Time.frameCount % 3 == 0) jitter = 0.8f + Mathf.Sin(Time.frameCount * 0.01f) * 0.1f;
+ 
         transform.position = playerTransform.position;
 
         Vector3[] vertices = new Vector3[rayCount + 2];
@@ -51,7 +54,7 @@ public class FieldOfView : MonoBehaviour
         for (int i = 0; i <= rayCount; i++)
         {
             Vector3 vertex;
-            Vector3 dir = GetVectorFromAngle(angle).normalized;
+            Vector3 dir = GetVectorFromAngle(angle);
 
 
             var hit = Physics2D.Raycast(origin, dir, viewDistance, LayerMask.GetMask("Default"));
@@ -59,11 +62,11 @@ public class FieldOfView : MonoBehaviour
             if (hit.collider == null)
             {
                 vertex = Vector3.zero + dir * viewDistance;
-                Debug.DrawLine(origin, vertex + origin);
+                Debug.DrawLine(origin, origin + vertex);
             }
             else
             {
-                vertex = hit.point + new Vector2(dir.x, dir.y) - new Vector2(origin.x, origin.y);
+                vertex = hit.point + new Vector2(dir.x, dir.y) * jitter - new Vector2(origin.x, origin.y);
                 Debug.DrawLine(origin, hit.point);
             }
 
@@ -93,13 +96,13 @@ public class FieldOfView : MonoBehaviour
     Vector3 GetVectorFromAngle(float angle)
     {
         float angleRad = angle * Mathf.Deg2Rad;
-
-        return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0);
+        Vector2 dir = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+        // Vector3 dir = new Vector3(, 0); 
+        return new Vector3(dir.x, dir.y, 0);
     }
-
     //// Update is called once per frame
     //void Update()
     //{
-        
+
     //}
 }
