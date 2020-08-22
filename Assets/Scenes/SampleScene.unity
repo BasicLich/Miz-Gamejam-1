@@ -4099,7 +4099,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7961236611091364901, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}
       propertyPath: Mute
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7961236611091364902, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}
       propertyPath: m_Name
