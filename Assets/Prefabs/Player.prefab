@@ -150,6 +150,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 85376caf-053d-4c21-af8a-d5851e52273e
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5349054364144735073}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Dodge
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b3c219f7-08ec-4626-a1ef-8b7686f2668d
+    m_ActionName: Player/Dodge[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -171,6 +187,9 @@ MonoBehaviour:
   rigidbody2d: {fileID: 0}
   animSpeed: 0.7
   animBobHeight: 0.03
+  health: 3
+  dodgeDuration: 0.2
+  dodgeSpeed: 15
 --- !u!50 &5349054364144735077
 Rigidbody2D:
   serializedVersion: 4

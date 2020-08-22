@@ -19,6 +19,7 @@ public class AbsEnemyController : MonoBehaviour
 
     public bool debug = false;
     public float moveSpeed = 4.0f;
+    string[] layerMask = {"Default", "Player"};
 
     void Awake()
     {
@@ -46,7 +47,7 @@ public class AbsEnemyController : MonoBehaviour
 
             float dir = Random.Range(0, 1.0f) * FoVRad + radOffset;
             temp = new Vector3(visionRange * Mathf.Cos(dir), visionRange * Mathf.Sin(dir), 0);
-            RaycastHit2D hit = Physics2D.Raycast(position, temp.normalized, visionRange);
+            RaycastHit2D hit = Physics2D.Raycast(position, temp.normalized, visionRange, LayerMask.GetMask(layerMask));
             //Debug.Log(temp);
             if (debug) Debug.DrawRay(transform.position, temp.normalized * visionRange, Color.blue);
 
