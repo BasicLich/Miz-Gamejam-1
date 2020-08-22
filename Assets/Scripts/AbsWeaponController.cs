@@ -7,4 +7,7 @@ public abstract class AbsWeaponController : AbsItem
 {
     public abstract void Look(InputAction.CallbackContext context);
     public abstract void Fire(InputAction.CallbackContext context);
+
+    public abstract void Equip();
+    public abstract void Unequip();
 }
