@@ -24,6 +24,7 @@ public class AbsEnemyController : MonoBehaviour
     int frameCounter = 0;
     public int framesBetweenLook = 4;
     string[] layerMask = {"Default", "Player"};
+    public float enemyAngle;
 
     void Awake()
     {
@@ -42,19 +43,11 @@ public class AbsEnemyController : MonoBehaviour
         } else
         {
             playerSighted = false;
-            lookDir = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z) * new Vector2(1, 0);
-            Vector2 left = (Quaternion.Euler(0, 0, fieldOfView / 2.0f) * lookDir);
-            Vector2 right = (Quaternion.Euler(0, 0, -fieldOfView / 2.0f) * lookDir);
-
-            //float stepX = (left.x - right.x) / visionFidelity;
-            //float stepY = (left.y - right.y) / visionFidelity;
 
             Vector3 temp;
 
             Vector2 position = transform.position;
-            float radOffset = Mathf.Atan2(right.y, right.x);
-            float degOffset = Mathf.Atan2(right.y, right.x) * Mathf.Rad2Deg;
-            angle = transform.rotation.eulerAngles.z + fieldOfView/2.0f;
+            angle = enemyAngle + fieldOfView/2.0f;
             float angleIncrease = fieldOfView / visionFidelity;
 
             Vector3[] vertices = new Vector3[visionFidelity + 2];
@@ -145,19 +138,11 @@ public class AbsEnemyController : MonoBehaviour
     {
         return;
         playerSighted = false;
-        lookDir = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z) * new Vector2(1, 0);
-        Vector2 left = (Quaternion.Euler(0, 0, fieldOfView / 2.0f) * lookDir);
-        Vector2 right = (Quaternion.Euler(0, 0, -fieldOfView / 2.0f) * lookDir);
-
-        //float stepX = (left.x - right.x) / visionFidelity;
-        //float stepY = (left.y - right.y) / visionFidelity;
 
         Vector3 temp;
 
         Vector2 position = transform.position;
-        float radOffset = Mathf.Atan2(right.y, right.x);
-        float degOffset = Mathf.Atan2(right.y, right.x) * Mathf.Rad2Deg;
-        angle = transform.rotation.eulerAngles.z + fieldOfView / 2.0f;
+        angle = enemyAngle + fieldOfView / 2.0f;
         float angleIncrease = fieldOfView / visionFidelity;
 
         Vector3[] vertices = new Vector3[visionFidelity + 2];
