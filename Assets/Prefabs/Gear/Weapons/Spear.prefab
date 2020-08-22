@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 7596578522557876282}
   - component: {fileID: 7596578522557876281}
   - component: {fileID: 1074987854809860386}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Spear
   m_TagString: MeleeWeapon
   m_Icon: {fileID: 0}
@@ -155,6 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
+  cost: 0
+  itemName: 
   playerTransform: {fileID: 0}
   meleeAttackSpeed: 0.1
   meleeAttackCoolDown: 0.2

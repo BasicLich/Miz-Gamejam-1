@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 8992284704423493043}
   - component: {fileID: 8992284704423493040}
   - component: {fileID: 8992284704423493041}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Hammer
   m_TagString: MeleeWeapon
   m_Icon: {fileID: 0}
@@ -155,6 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 3
+  cost: 0
+  itemName: 
   playerTransform: {fileID: 0}
   attackTime: 0.3
   lungeLength: 0.3
