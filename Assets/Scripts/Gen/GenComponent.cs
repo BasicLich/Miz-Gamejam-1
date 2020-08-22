@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEditor;
+//using UnityEditor;
 
 public class GenComponent : MonoBehaviour
 {
@@ -61,17 +61,17 @@ public class GenComponent : MonoBehaviour
 
 }
 
-[CustomEditor(typeof(GenComponent))]
-public class ScriptEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
+//[CustomEditor(typeof(GenComponent))]
+//public class ScriptEditor : Editor
+//{
+//    public override void OnInspectorGUI()
+//    {
+//        DrawDefaultInspector();
 
-        GenComponent genComp = (GenComponent)target;
-        if (GUILayout.Button("Generate Room"))
-        {
-            genComp.GenAndRender();
-        }
-    }
-}
+//        GenComponent genComp = (GenComponent)target;
+//        if (GUILayout.Button("Generate Room"))
+//        {
+//            genComp.GenAndRender();
+//        }
+//    }
+//}

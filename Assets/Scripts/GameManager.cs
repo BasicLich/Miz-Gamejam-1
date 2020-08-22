@@ -10,7 +10,11 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
     public Text ValueText;
+    public Text GiftedText;
+
     public DungeonController dungeonController;
+    public int amountToGive = 50;
+    public int amountGiven = 0;
 
     public List<int> items = new List<int>();
 
@@ -56,6 +60,32 @@ public class GameManager : MonoBehaviour
         Value -= item.cost;
         if (ValueText == null) return;
         ValueText.text = Value.ToString();
+    }
+
+    public void GiveMoneyToThePoor()
+    {
+        if (value > amountToGive)
+        {
+            value -= amountToGive;
+            amountGiven += amountToGive;
+            if (GiftedText != null)
+            {
+                GiftedText.text = amountGiven.ToString();
+            }
+        } else
+        {
+            amountGiven += value;
+            if (GiftedText != null)
+            {
+                GiftedText.text = amountGiven.ToString();
+            }
+            value = 0;
+        }
+    }
+
+    public bool HasBoughtItem(AbsItem item)
+    {
+        return Instance.items.Contains(item.GetItemId());
     }
 
     public void InitializeGUI()
