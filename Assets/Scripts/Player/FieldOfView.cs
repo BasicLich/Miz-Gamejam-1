@@ -59,7 +59,7 @@ public class FieldOfView : MonoBehaviour
             if (hit.collider == null)
             {
                 vertex = Vector3.zero + dir * viewDistance;
-                Debug.DrawLine(origin, vertex);
+                Debug.DrawLine(origin, vertex + origin);
             }
             else
             {

@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class EnemyFOV : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    public Transform parentTransform;
     // Update is called once per frame
     void Update()
     {
-        
+        transform.localRotation = Quaternion.Euler(0, 0, -parentTransform.eulerAngles.z);
+        //Debug.Log("pepepepepep");
     }
 }

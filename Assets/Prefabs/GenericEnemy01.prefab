@@ -136,6 +136,7 @@ MonoBehaviour:
   rigidbody2d: {fileID: 0}
   playerSighted: 0
   lastPlayerLocation: {x: 0, y: 0, z: 0}
+  angle: 0
   debug: 0
   moveSpeed: 4
 --- !u!61 &4979545956147696041
@@ -196,6 +197,7 @@ GameObject:
   - component: {fileID: 1556809915267710317}
   - component: {fileID: 6986106627705376683}
   - component: {fileID: 4491244858336950657}
+  - component: {fileID: 8004862697043718168}
   m_Layer: 2
   m_Name: FOV
   m_TagString: Untagged
@@ -266,3 +268,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8004862697043718168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404094432601855681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8243ac2ab9cf2cf40b747a6b0b1e228b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentTransform: {fileID: 563594900244572097}
