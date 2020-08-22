@@ -7,8 +7,8 @@ public class EnemyController : AbsEnemyController
     bool isDead = false;
     public bool isAttacking = false;
     Vector2 velocity, knockbackVelocity;
-    public Vector3 target; 
-    public int damage = 1; 
+    public Vector3 target;
+    public int damage = 1;
     public int health = 3;
     public float attackSpeed = 16.0f;
     public float attackTimer = 0.0f;
@@ -19,12 +19,19 @@ public class EnemyController : AbsEnemyController
     bool hitByPlayer = false;
     private float hitByPlayerAnimTimer = 0f;
     Vector3 knockbackDir;
+    public float attackDistance = 2.0f;
+    AudioSource alertSound;
+    bool seenPlayer = false;
+    bool patroling = true;
+    Vector3 patrolDir = Vector3.up;
 
     // Start is called before the first frame update
     void Start()
     {
         lastPlayerLocation = transform.position;
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+        alertSound = gameObject.GetComponentInChildren<AudioSource>();
+        enemyAngle = Mathf.Atan2(patrolDir.y, patrolDir.x) * Mathf.Rad2Deg;
     }
 
     void Update()
@@ -32,6 +39,12 @@ public class EnemyController : AbsEnemyController
         if (isAttacking) Attack();
         rigidbody2d.velocity = hitByPlayer ? knockbackVelocity : velocity;
         if (hitByPlayer) HitByPlayerAnim();
+        if (patroling) Patrol();
+    }
+
+    void PlayAlertSound()
+    {
+        if (!seenPlayer) { alertSound.Play(); seenPlayer = true; }
     }
 
     // Update is called once per frame
@@ -42,17 +55,21 @@ public class EnemyController : AbsEnemyController
         this.target = (lastPlayerLocation - transform.position);
         if (playerSighted)
         {
-            if (target.magnitude < 2.0)
+            patroling = false;
+            if (playerSighted) PlayAlertSound();
+            if (playerSighted && target.magnitude < attackDistance)
             {
                 if (!isAttacking) { isAttacking = true; attackTimer = 0.0f; };
-            } else
+            }
+            else
             {
-                rigidbody2d.velocity = target.normalized * moveSpeed;
-                transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg);
+                velocity = target.normalized * moveSpeed;
+                enemyAngle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
             }
         }
-        else {
-            rigidbody2d.velocity = Vector2.zero;
+        else
+        {
+            patroling = true;
         }
     }
     public void Die()
@@ -72,6 +89,7 @@ public class EnemyController : AbsEnemyController
         if (!hitByPlayer)
         {
             hitByPlayer = true;
+            seenPlayer = true;
             isAttacking = false;
             this.knockbackDir = knockbackDir;
             health -= damage;
@@ -81,13 +99,14 @@ public class EnemyController : AbsEnemyController
     public void HitByPlayerAnim()
     {
         spriteRenderer.color = Color.red;
-        knockbackVelocity = Vector2.Lerp(knockbackDir, Vector2.zero, (float)Math.Sin(hitByPlayerAnimTimer *  Math.PI));
+        knockbackVelocity = Vector2.Lerp(knockbackDir, Vector2.zero, (float)Math.Sin(hitByPlayerAnimTimer * Math.PI));
         hitByPlayerAnimTimer += Time.deltaTime;
         if (hitByPlayerAnimTimer > 0.2)
         {
             hitByPlayer = false;
             hitByPlayerAnimTimer = 0;
             spriteRenderer.color = Color.white;
+            RealignTowardsPlayer();
         }
     }
 
@@ -115,12 +134,32 @@ public class EnemyController : AbsEnemyController
             spriteRenderer.color = Color.white;
         }
         // End
-        else if (isAttacking) isAttacking = false;
+        else if (isAttacking)
+        {
+            isAttacking = false;
+            RealignTowardsPlayer();
+        };
     }
 
     // Attack connected: Skip straight to cooldown
     public void FinishAttack()
     {
         if (attackTimer < attackEnd) attackTimer = attackEnd;
+    }
+    void RealignTowardsPlayer()
+    {
+        this.target = (playerCollider.transform.position - transform.position);
+        enemyAngle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
+    }
+
+    public void Patrol()
+    {
+        velocity = patrolDir;
+    }
+
+    void OnCollisionEnter2D(Collision2D collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag == "Wall" || collisionInfo.gameObject.tag == "Enemy") patrolDir *= -1;
+        enemyAngle = Mathf.Atan2(patrolDir.y, patrolDir.x) * Mathf.Rad2Deg;
     }
 }

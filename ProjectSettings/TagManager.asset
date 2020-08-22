@@ -10,6 +10,7 @@ TagManager:
   - MeleeWeapon
   - Sound
   - PlayerCollider
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Enemies
   - FOV
   - Weapon
-  - 
+  - Wall
   - 
   - 
   - 

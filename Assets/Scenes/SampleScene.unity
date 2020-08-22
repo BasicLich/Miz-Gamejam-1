@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8540061823064835340, guid: 6b737aa33831cf244b9459d1d06478f6, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8540061823676927815, guid: 6b737aa33831cf244b9459d1d06478f6, type: 3}
       propertyPath: m_Name
@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8540061823676927815, guid: 6b737aa33831cf244b9459d1d06478f6, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8540061823676927815, guid: 6b737aa33831cf244b9459d1d06478f6, type: 3}
       propertyPath: m_IsActive
@@ -177,6 +177,10 @@ PrefabInstance:
     - target: {fileID: 8540061823676927818, guid: 6b737aa33831cf244b9459d1d06478f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621258767243970792, guid: 6b737aa33831cf244b9459d1d06478f6, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b737aa33831cf244b9459d1d06478f6, type: 3}
@@ -259,7 +263,7 @@ GameObject:
   - component: {fileID: 450293618}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3648,7 +3652,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494078352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 450293617}
@@ -3888,6 +3892,10 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1385984338}
+    - target: {fileID: 1074987854809860386, guid: f2577d6c737c9dd4b8aa58b926c93a7b, type: 3}
+      propertyPath: meleeRange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7596578522557876279, guid: f2577d6c737c9dd4b8aa58b926c93a7b, type: 3}
       propertyPath: m_Name
       value: Spear
