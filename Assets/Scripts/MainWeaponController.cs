@@ -12,7 +12,6 @@ public class MainWeaponController : MonoBehaviour
     {
         if (equippedWeapon == null) return;
         equippedWeapon.Fire(context);
-        SceneManager.LoadScene(2);
     }
     public void Look(InputAction.CallbackContext context)
     {
