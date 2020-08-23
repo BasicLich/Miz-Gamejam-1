@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     public void transitionToDungeonScene()
     {
-        dungeonController.generateDungeon(5.7f, 4);
+        dungeonController.generateDungeon(maxHealth + items.Count, 4);
         SceneManager.LoadScene(0);
         hearts = FindObjectOfType<HeartController>();
     }

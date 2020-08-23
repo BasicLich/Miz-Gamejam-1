@@ -151,7 +151,7 @@ MonoBehaviour:
   attackTimer: 0
   windupEnd: 0.2
   attackEnd: 0.4
-  cooldownEnd: 0.8
+  cooldownEnd: 1.2
   spriteRenderer: {fileID: 0}
   attackDistance: 3
   dropObject: {fileID: 6878526973135531064, guid: ec5221cd9e2523743a71a92b7f30dac4, type: 3}
