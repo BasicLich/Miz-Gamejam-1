@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,6 +29,37 @@ public class PlayerController : MonoBehaviour
     bool standingOnExit = false;
     bool standingOnTreasure = false;
     TreasureController treasureReference;
+
+    List<HelmetController> helmets;
+    List<TorsoController> torsos;
+
+    private void Awake()
+    {
+        helmets = GetComponentsInChildren<HelmetController>().ToList();
+        torsos = GetComponentsInChildren<TorsoController>().ToList();
+        if (GameManager.Instance == null)
+        {
+            return;
+        }
+        var weapons = GetComponentsInChildren<AbsWeaponController>();
+
+        if (weapons.Length > 0)
+        {
+            foreach (var weapon in weapons)
+            {
+                if (GameManager.Instance.equippedWeapon == weapon.GetItemId())
+                {
+                    weapon.gameObject.SetActive(true);
+                    GetComponent<MainWeaponController>().equippedWeapon = weapon;
+                    //break;
+                }
+                else
+                {
+                    weapon.gameObject.SetActive(false);
+                }
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -121,6 +153,17 @@ public class PlayerController : MonoBehaviour
         if (hitByEnemyAnimTimer > 0.2) { isHitByEnemy = false; hitByEnemyAnimTimer = 0; };
     }
 
+    public void UpdateArmor()
+    {
+        foreach(var helmet in helmets)
+        {
+            helmet.UpdateLook();
+        }
+        foreach (var torso in torsos)
+        {
+            torso.UpdateLook();
+        }
+    }
     public void MoveToNextFloor(InputAction.CallbackContext context)
     {
         if (context.performed && standingOnExit)

@@ -155,8 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 3
-  cost: 0
-  itemName: 
+  cost: 200
+  itemName: Hammer
   playerTransform: {fileID: 0}
   attackTime: 0.3
   lungeLength: 0.3
