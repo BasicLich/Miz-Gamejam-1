@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8540061823676927815, guid: 6b737aa33831cf244b9459d1d06478f6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8540061823676927816, guid: 6b737aa33831cf244b9459d1d06478f6, type: 3}
       propertyPath: playerTransform
@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8992284704423493054, guid: ecfee4b75405b184c86f4f9229b03e5a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecfee4b75405b184c86f4f9229b03e5a, type: 3}
@@ -522,6 +522,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7961236611091364901, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7961236611091364902, guid: ce3ddadfeae25e3448a16a9504b089df, type: 3}
       propertyPath: m_Name
       value: Spooky Music Player
@@ -550,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8820089668522835420, guid: 05c5a96ca9d9a52429634eb8aef8a180, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8820089668522835422, guid: 05c5a96ca9d9a52429634eb8aef8a180, type: 3}
       propertyPath: m_LocalPosition.x
@@ -664,7 +668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5636351319884373177, guid: c7ab62075824edf4db4369133a9fa4ff, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7ab62075824edf4db4369133a9fa4ff, type: 3}

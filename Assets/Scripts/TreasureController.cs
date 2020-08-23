@@ -10,10 +10,12 @@ public class TreasureController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     int value;
     bool opened = false;
+    AudioSource audioSource;
     void Start()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = closedSprite;
+        audioSource = gameObject.GetComponentInChildren<AudioSource>();
     }
 
     public void SetValue(int value)
@@ -27,6 +29,7 @@ public class TreasureController : MonoBehaviour
             GameManager.Instance.AddValue(value);
             spriteRenderer.sprite = openSprite;
             opened = true;
+            audioSource.Play();
         }
     }
 }
