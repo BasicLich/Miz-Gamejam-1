@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public float dodgeSpeed = 30.0f;
     Vector2 direction;
     Vector2 dodgeDirection;
+    bool standingOnExit = false;
 
     // Start is called before the first frame update
     void Start()
@@ -83,12 +84,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ascendStaircase()
-    {
-        // GameManager.Instance.dungeonController.nextFloor();
-        // transform.position = GameManager.Instance.dungeonController.getFloorStart();
-    }
-
     public void DungeonButton()
     {
         Debug.Log("test!");
@@ -122,5 +117,31 @@ public class PlayerController : MonoBehaviour
         knockbackVelocity = Vector2.Lerp(knockbackDir, Vector2.zero, (float)Math.Sin(hitByEnemyAnimTimer * Math.PI));
         hitByEnemyAnimTimer += Time.deltaTime;
         if (hitByEnemyAnimTimer > 0.2) { isHitByEnemy = false; hitByEnemyAnimTimer = 0; };
+    }
+
+    public void MoveToNextFloor(InputAction.CallbackContext context)
+    {
+        if (context.performed && standingOnExit)
+        {
+            Debug.Log("Moving on");
+            bool isDone = GameManager.Instance.dungeonController.MoveToNextFloor();
+            if (!isDone) transform.position = GameManager.Instance.dungeonController.GetFloorStart();
+        }
+    }
+
+    // OnTriggerEnter2D is inconsistent, so we use ontriggerstay
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Exit")
+        {
+            standingOnExit = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Exit")
+        {
+            standingOnExit = false;
+        }
     }
 }

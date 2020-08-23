@@ -1,4 +1,4 @@
-﻿using System;
+﻿// using System;
 using UnityEngine;
 
 public class EnemyController : AbsEnemyController
@@ -23,11 +23,13 @@ public class EnemyController : AbsEnemyController
     AudioSource alertSound;
     bool seenPlayer = false;
     bool patroling = true;
-    Vector3 patrolDir = Vector3.up;
+    static Vector3[] patrolDirections = {Vector3.up, Vector3.right};
+    Vector3 patrolDir;
 
     // Start is called before the first frame update
     void Start()
     {
+        patrolDir = patrolDirections[Random.Range(0, 2)];
         lastPlayerLocation = transform.position;
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
         alertSound = gameObject.GetComponentInChildren<AudioSource>();
@@ -53,14 +55,21 @@ public class EnemyController : AbsEnemyController
         if (isDead || isAttacking || hitByPlayer) return;
         FindPlayer();
         this.target = (lastPlayerLocation - transform.position);
-        if (playerSighted)
+        if (playerSighted || seenPlayer)
         {
             patroling = false;
-            if (playerSighted) PlayAlertSound();
+            PlayAlertSound();
+            // Player sighted and in range to attack
             if (playerSighted && target.magnitude < attackDistance)
             {
                 if (!isAttacking) { isAttacking = true; attackTimer = 0.0f; };
             }
+            else if (!playerSighted && target.magnitude < 0.1f)
+            {
+                seenPlayer = false;
+                enemyAngle = Mathf.Atan2(patrolDir.y, patrolDir.x) * Mathf.Rad2Deg;
+            }
+            // Last position known/player sighted but not in range to attack
             else
             {
                 velocity = target.normalized * moveSpeed;
@@ -99,7 +108,7 @@ public class EnemyController : AbsEnemyController
     public void HitByPlayerAnim()
     {
         spriteRenderer.color = Color.red;
-        knockbackVelocity = Vector2.Lerp(knockbackDir, Vector2.zero, (float)Math.Sin(hitByPlayerAnimTimer * Math.PI));
+        knockbackVelocity = Vector2.Lerp(knockbackDir, Vector2.zero, (float)Mathf.Sin(hitByPlayerAnimTimer * Mathf.PI));
         hitByPlayerAnimTimer += Time.deltaTime;
         if (hitByPlayerAnimTimer > 0.2)
         {
@@ -154,7 +163,7 @@ public class EnemyController : AbsEnemyController
 
     public void Patrol()
     {
-        velocity = patrolDir;
+        velocity = patrolDir * moveSpeed/2;
     }
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
