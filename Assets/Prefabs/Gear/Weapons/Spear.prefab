@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
-  cost: 250
+  cost: 1000
   itemName: Spear
   playerTransform: {fileID: 0}
   meleeAttackSpeed: 0.1

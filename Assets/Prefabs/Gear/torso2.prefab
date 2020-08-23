@@ -96,6 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 501
-  cost: 100
+  cost: 250
   itemName: Torso Mk.2
-  extraHealth: 2
+  extraHealth: 1

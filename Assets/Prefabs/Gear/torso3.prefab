@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4981703081706877902}
   - component: {fileID: 4636827262799169821}
   m_Layer: 0
-  m_Name: torso1mono
+  m_Name: torso3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,4 +98,4 @@ MonoBehaviour:
   id: 502
   cost: 1000
   itemName: Torso Mk.3
-  extraHealth: 4
+  extraHealth: 2

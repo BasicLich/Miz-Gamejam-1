@@ -30,7 +30,6 @@ public class BigPeteController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("HELLO STEALEN! HOW ARE YOU?!");
         bigPeteText.gameObject.SetActive(true);
         bigPeteShopBtn.gameObject.SetActive(true);
     }

@@ -566,18 +566,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthCoinUI
       objectReference: {fileID: 0}
-    - target: {fileID: 3568591770280349292, guid: 0d650fe7be5944d47bd11c03b3da7feb, type: 3}
-      propertyPath: m_Color.r
-      value: 0.3962264
-      objectReference: {fileID: 0}
-    - target: {fileID: 3568591770280349292, guid: 0d650fe7be5944d47bd11c03b3da7feb, type: 3}
-      propertyPath: m_Color.g
-      value: 0.3962264
-      objectReference: {fileID: 0}
-    - target: {fileID: 3568591770280349292, guid: 0d650fe7be5944d47bd11c03b3da7feb, type: 3}
-      propertyPath: m_Color.b
-      value: 0.3962264
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d650fe7be5944d47bd11c03b3da7feb, type: 3}
 --- !u!1001 &1341139058

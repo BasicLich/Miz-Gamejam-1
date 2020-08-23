@@ -155,8 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 5
-  cost: 350
-  itemName: Big Hammer
+  cost: 2000
+  itemName: King's Hammer
   playerTransform: {fileID: 0}
   attackTime: 0.2
   lungeLength: 0.9
