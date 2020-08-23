@@ -39,7 +39,7 @@ public class EnemyRoom : Room
     }
     void PlaceEnemies()
     {
-        int enemyCount = 3; // FIXME: Derive from difficulty
+        int enemyCount = (int)Random.Range(0, difficulty); // FIXME: Derive from difficulty
         Vector2Int[] enemyCoords = genUniqueRandomCoords(new Vector2Int[enemyCount], enemyCount);
         this.enemies = new EnemySpawnProperties[enemyCount];
         for (int i = 0; i < enemyCount; i++)
