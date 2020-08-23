@@ -48,7 +48,7 @@ public class EnemyRoom : Room
         }
     }
 
-    Vector2Int[] genUniqueRandomCoords(Vector2Int[] coords, int iterations, int n = 0)
+    Vector2Int[] genUniqueRandomCoords(Vector2Int[] coords, int iterations, int n = 0, int tries = 0)
     {
         if (n == iterations) return coords;
         Vector2Int newCoord = new Vector2Int(
@@ -56,8 +56,8 @@ public class EnemyRoom : Room
             Random.Range(2, (int)roomRect.height - 2));
         for (int i = 0; i < n; i++)
         {
-            // FIXME: Recurses infinitely if there are more enemies than tiles!!!
-            if (coords[i].Equals(newCoord)) return genUniqueRandomCoords(coords,iterations, n);
+            if (Vector2Int.Distance(coords[i], newCoord) < 3 && tries < 10)
+                return genUniqueRandomCoords(coords, iterations, n, tries + 1);
         }
         coords[n] = newCoord;
 

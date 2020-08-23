@@ -62,4 +62,13 @@ public static class TileLoader
         return tileDict;
     }
 
+    public static Dictionary<string, TileBase> LoadExitTiles(string tileset)
+    {
+        Dictionary<string, TileBase> tileDict = new Dictionary<string, TileBase>();
+        string prefix = "Tiles/" + tileset + "/Exit/";
+        tileDict.Add("stairsUp", LoadTile(prefix, "stairsUp"));
+        tileDict.Add("ladder", LoadTile(prefix, "ladder"));
+        return tileDict;
+    }
+
 }

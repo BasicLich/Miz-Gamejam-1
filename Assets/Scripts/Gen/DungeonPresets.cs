@@ -3,12 +3,12 @@
 public static class DungeonPresets
 {
     public static DungeonParams medium = new DungeonParams(
-        new Vector2Int(9, 14),
-        new Vector2Int(4, 7),
-        new Vector2Int(64, 64),
-        new Vector2Int(7, 10),
-        10,
-        3
+        new Vector2Int(12, 16),
+        new Vector2Int(2, 8),
+        new Vector2Int(96, 96),
+        new Vector2Int(5, 7),
+        20,
+        4
     );
 
     public static DungeonParams difficultyToDungeonParams(float difficulty)

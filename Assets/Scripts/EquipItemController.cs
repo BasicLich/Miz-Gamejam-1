@@ -8,26 +8,25 @@ public class EquipItemController : MonoBehaviour
     public AbsItem item;
 
     public Image image;
-    public Color equippedColor;
-    public Color notEquippedColor;
 
     DungeonEquipmentScreenController parent;
     private void Awake()
     {
         parent = gameObject.GetComponentInParent<DungeonEquipmentScreenController>();
-        Debug.Log(parent);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         if (item != null) GetComponentInChildren<Text>().text = item.itemName;
+        if (image == null) image = GetComponent<Image>();
         if (!GameManager.Instance.HasBoughtItem(item))
         {
             gameObject.SetActive(false);
         } else
         {
-            SetColor();
+            if (parent != null)
+                SetColor(parent.equipColor, parent.notEquipColor);
         }
     }
 
@@ -39,8 +38,9 @@ public class EquipItemController : MonoBehaviour
         }
     }
 
-    public void SetColor()
+    public void SetColor(Color equippedColor, Color notEquippedColor)
     {
+        Debug.Log(equippedColor);
         if (GameManager.Instance != null)
         {
             if (GameManager.Instance.equippedWeapon == item.GetItemId())

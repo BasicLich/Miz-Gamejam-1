@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float dodgeSpeed = 30.0f;
     Vector2 direction;
     Vector2 dodgeDirection;
+    bool standingOnExit = false;
 
     List<HelmetController> helmets;
     List<TorsoController> torsos;
@@ -115,12 +116,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ascendStaircase()
-    {
-        // GameManager.Instance.dungeonController.nextFloor();
-        // transform.position = GameManager.Instance.dungeonController.getFloorStart();
-    }
-
     public void DungeonButton()
     {
         Debug.Log("test!");
@@ -165,6 +160,31 @@ public class PlayerController : MonoBehaviour
         foreach (var torso in torsos)
         {
             torso.UpdateLook();
+        }
+    }
+    public void MoveToNextFloor(InputAction.CallbackContext context)
+    {
+        if (context.performed && standingOnExit)
+        {
+            Debug.Log("Moving on");
+            bool isDone = GameManager.Instance.dungeonController.MoveToNextFloor();
+            if (!isDone) transform.position = GameManager.Instance.dungeonController.GetFloorStart();
+        }
+    }
+
+    // OnTriggerEnter2D is inconsistent, so we use ontriggerstay
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Exit")
+        {
+            standingOnExit = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Exit")
+        {
+            standingOnExit = false;
         }
     }
 }

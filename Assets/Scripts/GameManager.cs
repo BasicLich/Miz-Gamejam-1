@@ -34,7 +34,10 @@ public class GameManager : MonoBehaviour
     {
         dungeonController.generateDungeon(5.7f, 4);
         SceneManager.LoadScene(0);
-        // scenetransition to dungeon scene
+    }
+    public void transitionToCampScene()
+    {
+        SceneManager.LoadScene(2);
     }
 
     

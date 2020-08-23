@@ -33,11 +33,20 @@ public class DungeonController
     public int activeFloor;
     public int activeRoom, activeCorridor;
 
-    public void onDungeonFloorAdvance()
+    public bool MoveToNextFloor()
     {
-        activeRoom = 0;
-        activeCorridor = 0;
-        activeFloor++;
+        if (dungeonFloors.Count > activeFloor + 1)
+        { 
+            activeRoom = 0;
+            activeCorridor = 0;
+            activeFloor++;
+            return false;
+        }
+        else
+        {
+            GameManager.Instance.transitionToCampScene();
+            return true;
+        }
     }
 
     public void generateDungeon(float difficulty, int floors)
@@ -70,5 +79,10 @@ public class DungeonController
     public DungeonFloor GetActiveDungeonFloor()
     {
         return dungeonFloors[activeFloor];
+    }
+
+    public Vector2 GetFloorStart()
+    {
+        return GetActiveDungeonFloor().rooms[0].roomRect.center;
     }
 }

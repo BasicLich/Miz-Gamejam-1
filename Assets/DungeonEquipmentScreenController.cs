@@ -7,6 +7,8 @@ public class DungeonEquipmentScreenController : MonoBehaviour
 {
     [SerializeField]
     List<EquipItemController> childControllers;
+    public Color equipColor;
+    public Color notEquipColor;
 
 
     private void OnEnable()
@@ -28,6 +30,7 @@ public class DungeonEquipmentScreenController : MonoBehaviour
 
     public void SetEquippedItem()
     {
-        childControllers.ForEach(child => child.SetColor());
+        Debug.Log(equipColor);
+        childControllers.ForEach(child => child.SetColor(equipColor, notEquipColor));
     }
 }
