@@ -49,11 +49,22 @@ public class DungeonController
         }
     }
 
-    public void generateDungeon(float difficulty, int floors)
+    int DifficultyToFloors(float difficulty)
     {
+        if (difficulty < 7) return Random.Range(2, 4);
+        if (difficulty < 13) return Random.Range(2, 5);
+        return Random.Range(3, 5);
+
+    }
+
+    public void generateDungeon(float difficulty)
+    {
+        Debug.Log(difficulty);
+        int floors = DifficultyToFloors(difficulty);
         dungeonFloors.Clear();
         activeFloor = 0;
         float floorDifficulty = (difficulty / floors) * 2;
+        Debug.Log(floorDifficulty);
 
         for (int i = 0; i < floors; i++)
         {

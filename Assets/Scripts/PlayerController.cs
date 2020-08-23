@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody2d = gameObject.GetComponent<Rigidbody2D>();
         health = GameManager.Instance.maxHealth;
+        if (GameManager.Instance.inDungeon) transform.position = GameManager.Instance.dungeonController.GetFloorStart();
     }
 
     // Update is called once per frame
@@ -148,6 +149,11 @@ public class PlayerController : MonoBehaviour
         {
             isHitByEnemy = true;
             health -= damage;
+            if (health <= 0)
+            {
+                GameManager.Instance.value = 0;
+                GameManager.Instance.transitionToCampScene();
+            }
             this.knockbackDir = knockbackDir;
             GameManager.Instance.hearts.UpdateHearts();
         }

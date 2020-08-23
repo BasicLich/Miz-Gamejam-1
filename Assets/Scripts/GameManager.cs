@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public TorsoController equippedTorso;
     
     public int equippedWeapon;
+    public bool inDungeon = false;
     
     // --- END Plyer Stats ---
 
@@ -48,13 +49,15 @@ public class GameManager : MonoBehaviour
 
     public void transitionToDungeonScene()
     {
-        dungeonController.generateDungeon(maxHealth + items.Count, 4);
+        dungeonController.generateDungeon(maxHealth + items.Count);
         SceneManager.LoadScene(0);
         hearts = FindObjectOfType<HeartController>();
+        inDungeon = true;
     }
     public void transitionToCampScene()
     {
         SceneManager.LoadScene(2);
+        inDungeon = false;
     }
 
     
