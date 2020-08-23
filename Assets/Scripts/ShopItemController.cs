@@ -22,11 +22,29 @@ public class ShopItemController : MonoBehaviour
         if (!GameManager.Instance.items.Contains(item.GetItemId()) && GameManager.Instance.Value >= item.cost)
         {
             GameManager.Instance.AddItem(item);
+            gameObject.SetActive(false);
             if (item is ProgressionItem progItem)
             {
                 progItem.ActivateItem();
             }
-            gameObject.SetActive(false);
+            else if (item is TorsoController torso)
+            {
+                torso.Equip();
+                var player = FindObjectOfType<PlayerController>();
+                if (player != null)
+                {
+                    player.UpdateArmor();
+                }
+            }
+            else if (item is HelmetController helmet)
+            {
+                helmet.Equip();
+                var player = FindObjectOfType<PlayerController>();
+                if(player != null)
+                {
+                    player.UpdateArmor();
+                }
+            }
         }
     }
 }

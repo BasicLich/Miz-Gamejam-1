@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +17,18 @@ public class TorsoController : AbsItem
             gameObject.SetActive(false);
         }
     }
-
+    private void OnEnable()
+    {
+        if (GameManager.Instance == null) return;
+        if (GameManager.Instance.equippedTorso != null && GameManager.Instance.equippedTorso.GetItemId() == GetItemId())
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
     public void Equip()
     {
         if (GameManager.Instance != null
@@ -34,6 +46,18 @@ public class TorsoController : AbsItem
         if (GameManager.Instance != null)
         {
             GameManager.Instance.maxHealth -= extraHealth;
+        }
+    }
+
+    internal void UpdateLook()
+    {
+        if (GameManager.Instance.equippedTorso != null && GameManager.Instance.equippedTorso.GetItemId() == GetItemId())
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
     }
 }

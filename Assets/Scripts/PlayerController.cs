@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,8 +27,13 @@ public class PlayerController : MonoBehaviour
     Vector2 direction;
     Vector2 dodgeDirection;
 
+    List<HelmetController> helmets;
+    List<TorsoController> torsos;
+
     private void Awake()
     {
+        helmets = GetComponentsInChildren<HelmetController>().ToList();
+        torsos = GetComponentsInChildren<TorsoController>().ToList();
         if (GameManager.Instance == null)
         {
             return;
@@ -148,5 +154,17 @@ public class PlayerController : MonoBehaviour
         knockbackVelocity = Vector2.Lerp(knockbackDir, Vector2.zero, (float)Math.Sin(hitByEnemyAnimTimer * Math.PI));
         hitByEnemyAnimTimer += Time.deltaTime;
         if (hitByEnemyAnimTimer > 0.2) { isHitByEnemy = false; hitByEnemyAnimTimer = 0; };
+    }
+
+    public void UpdateArmor()
+    {
+        foreach(var helmet in helmets)
+        {
+            helmet.UpdateLook();
+        }
+        foreach (var torso in torsos)
+        {
+            torso.UpdateLook();
+        }
     }
 }

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public DungeonController dungeonController;
 
     public List<int> items = new List<int>();
+    public bool debug = false;
 
 
     // --- Player Stats ---
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
             instance = this;
             dungeonController = new DungeonController();
             GameObject.DontDestroyOnLoad(gameObject);
+            if (debug) value = 10000;
         }
     }
 
