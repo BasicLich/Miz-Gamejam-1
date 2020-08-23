@@ -1,4 +1,4 @@
-![](Coverart_itchio.PNG)
+![](Coverart_itchio.png)
 
 Music by:
 Matt Nida: https://freemusicarchive.org/music/Matt_Nida
