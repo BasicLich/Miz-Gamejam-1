@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidbody2d = gameObject.GetComponent<Rigidbody2D>();
+        health = GameManager.Instance.maxHealth;
     }
 
     // Update is called once per frame
@@ -144,6 +145,7 @@ public class PlayerController : MonoBehaviour
             isHitByEnemy = true;
             health -= damage;
             this.knockbackDir = knockbackDir;
+            GameManager.Instance.hearts.UpdateHearts();
         }
     }
     public void HitByEnemyAnim()
