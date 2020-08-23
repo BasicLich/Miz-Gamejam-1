@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ValueText: {fileID: 0}
+  items: 
+  maxHealth: 3
+  equippedHelmet: 400
+  equippedTorso: 0
+  equippedWeapon: 0
+  value: 0

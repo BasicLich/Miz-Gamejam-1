@@ -26,6 +26,32 @@ public class PlayerController : MonoBehaviour
     Vector2 direction;
     Vector2 dodgeDirection;
 
+    private void Awake()
+    {
+        if (GameManager.Instance == null)
+        {
+            return;
+        }
+        var weapons = GetComponentsInChildren<AbsWeaponController>();
+
+        if (weapons.Length > 0)
+        {
+            foreach (var weapon in weapons)
+            {
+                if (GameManager.Instance.equippedWeapon == weapon.GetItemId())
+                {
+                    weapon.gameObject.SetActive(true);
+                    GetComponent<MainWeaponController>().equippedWeapon = weapon;
+                    //break;
+                }
+                else
+                {
+                    weapon.gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
