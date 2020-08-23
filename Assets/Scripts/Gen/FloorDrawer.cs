@@ -8,6 +8,7 @@ public class FloorDrawer : MonoBehaviour
     public Tilemap floorTilemap;
     public Tilemap exitTilemap;
     public GameObject enemyPrefab;
+    public GameObject treasurePrefab;
     public List<GameObject> instantiatedEnemies = new List<GameObject>();
     Dictionary<string, TileBase> exitTiles;
     int currentFloor = 0;
@@ -38,6 +39,14 @@ public class FloorDrawer : MonoBehaviour
             Destroy(enemy);
         }
         instantiatedEnemies.Clear();
+        foreach(GameObject coin in GameObject.FindGameObjectsWithTag("Coin"))
+        {
+            Destroy(coin);
+        }
+        foreach(GameObject treasure in GameObject.FindGameObjectsWithTag("Treasure"))
+        {
+            Destroy(treasure);
+        }
     }
 
     public void DrawFloor()
@@ -73,6 +82,12 @@ public class FloorDrawer : MonoBehaviour
                     instantiatedEnemies.Add(newEnemy);
             }
         }
+        else if (room is TreasureRoom treasureRoom)
+        {
+            GameObject treasure = Instantiate(treasurePrefab,  room.roomRect.center + Vector2.left * 2, Quaternion.identity);
+            treasure.GetComponent<TreasureController>().SetValue(treasureRoom.value);
+        }
+
         RenderTiles(floorTilemap, room.floorTiles, new Vector2Int(botX + 1, botY + 1));
     }
 

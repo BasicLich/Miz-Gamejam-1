@@ -25,6 +25,7 @@ public class EnemyController : AbsEnemyController
     bool patroling = true;
     static Vector3[] patrolDirections = {Vector3.up, Vector3.right};
     Vector3 patrolDir;
+    public GameObject dropObject;
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +85,7 @@ public class EnemyController : AbsEnemyController
     public void Die()
     {
         isDead = true;
+        Instantiate(dropObject, gameObject.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

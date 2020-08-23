@@ -12,6 +12,8 @@ TagManager:
   - PlayerCollider
   - Wall
   - Exit
+  - Coin
+  - Treasure
   layers:
   - Default
   - TransparentFX
@@ -27,7 +29,7 @@ TagManager:
   - FOV
   - Weapon
   - Wall
-  - 
+  - Coin
   - 
   - 
   - 

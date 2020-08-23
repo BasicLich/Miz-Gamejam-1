@@ -391,7 +391,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 832231345, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1179278011, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
       propertyPath: equippedWeapon
@@ -399,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 1111553409}
     - target: {fileID: 1959895491, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5349054364144735072, guid: aef50c1083e73c34f887fbe71f0e4777, type: 3}
       propertyPath: m_LocalPosition.x
