@@ -30,13 +30,17 @@ public class PlayerController : MonoBehaviour
     bool standingOnTreasure = false;
     TreasureController treasureReference;
 
+    [SerializeField]
     List<HelmetController> helmets;
+    [SerializeField]
     List<TorsoController> torsos;
 
     private void Awake()
     {
-        helmets = GetComponentsInChildren<HelmetController>().ToList();
-        torsos = GetComponentsInChildren<TorsoController>().ToList();
+        //GetComponentsInChildren<TorsoController>(true)
+        helmets = GetComponentsInChildren<HelmetController>(true).ToList();
+        torsos = GetComponentsInChildren<TorsoController>(true).ToList();
+
         if (GameManager.Instance == null)
         {
             return;

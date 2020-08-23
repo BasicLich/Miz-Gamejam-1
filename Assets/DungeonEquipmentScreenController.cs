@@ -10,11 +10,14 @@ public class DungeonEquipmentScreenController : MonoBehaviour
     public Color equipColor;
     public Color notEquipColor;
 
+    private void Start()
+    {
+        childControllers = GetComponentsInChildren<EquipItemController>(true).ToList();
+    }
 
     private void OnEnable()
     {
         SetActiveAllChildren(transform, true);
-        childControllers = GetComponentsInChildren<EquipItemController>().ToList();
         SetEquippedItem();
     }
 
