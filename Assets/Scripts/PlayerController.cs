@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     Vector2 direction;
     Vector2 dodgeDirection;
     bool standingOnExit = false;
+    bool standingOnTreasure = false;
+    TreasureController treasureReference;
 
     List<HelmetController> helmets;
     List<TorsoController> torsos;
@@ -172,6 +174,11 @@ public class PlayerController : MonoBehaviour
             bool isDone = GameManager.Instance.dungeonController.MoveToNextFloor();
             if (!isDone) transform.position = GameManager.Instance.dungeonController.GetFloorStart();
         }
+        else if (context.performed && standingOnTreasure)
+        {
+            treasureReference.OpenTreasure();
+
+        }
     }
 
     // OnTriggerEnter2D is inconsistent, so we use ontriggerstay
@@ -181,12 +188,21 @@ public class PlayerController : MonoBehaviour
         {
             standingOnExit = true;
         }
+        else if (other.gameObject.tag == "Treasure")
+        {
+            standingOnTreasure = true;
+            treasureReference = other.gameObject.GetComponent<TreasureController>();
+        }
     }
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Exit")
         {
             standingOnExit = false;
+        }
+        else if (other.gameObject.tag == "Treasure")
+        {
+            standingOnTreasure = false;
         }
     }
 }

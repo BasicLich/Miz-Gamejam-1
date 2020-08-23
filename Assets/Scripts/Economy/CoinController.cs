@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CoinController : MonoBehaviour
 {
     public int value = 5;
+    public int[] possibleValues = {5, 5, 5, 5, 10, 10, 20, 20, 50, 100};
     public Text valueText;
 
     public List<Sprite> lowValueTextures = new List<Sprite>();
@@ -15,16 +16,16 @@ public class CoinController : MonoBehaviour
 
     private void Start()
     {
+        value = possibleValues[Random.Range(0, possibleValues.Length)];
         SetSprite();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.tag == "Player")
+        if (other.tag == "Player")
         {
-            Debug.Log("Coin Pickup!");
-            GameManager.Instance.AddValue(value);
-            Destroy(gameObject);
+        GameManager.Instance.AddValue(value);
+        Destroy(gameObject);
         }
     }
 

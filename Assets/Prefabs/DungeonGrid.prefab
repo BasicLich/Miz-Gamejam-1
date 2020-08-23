@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 6371839044007546631}
   - component: {fileID: 6371839044007546626}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: DungeonGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,6 +350,7 @@ MonoBehaviour:
   floorTilemap: {fileID: 6371839044001563006}
   exitTilemap: {fileID: 6371839044185122770}
   enemyPrefab: {fileID: 563594900244572099, guid: 45a202fb8207e354da8f5dab580d5e19, type: 3}
+  treasurePrefab: {fileID: 3259432882715835772, guid: 535208dd9f200d04ca31f0d62159b1f5, type: 3}
   instantiatedEnemies: []
 --- !u!1 &6371839044135758328
 GameObject:
@@ -3708,7 +3709,7 @@ GameObject:
   - component: {fileID: 6371839044185122770}
   - component: {fileID: 6371839044185122773}
   - component: {fileID: 6371839044185122771}
-  m_Layer: 2
+  m_Layer: 14
   m_Name: Exit
   m_TagString: Exit
   m_Icon: {fileID: 0}

@@ -16,14 +16,14 @@ public static class RoomBuilder
 
         int totalRooms = roomRects.Count;
         int enemyRooms = (int)Mathf.Floor(Random.Range(0.7f, 0.8f) * totalRooms);
-        int roomsLeft = totalRooms - enemyRooms;
+        int treasureRooms = totalRooms - enemyRooms;
 
         int a = totalRooms;
         for (int i = 1; i < a; i++)
         {
             if (enemyRooms < totalRooms && Random.Range(0.0f, 1.0f) > 0.75f)
             {
-                rooms.Add(new EmptyRoom(roomRects[i], floorTiles["floor"]));
+                rooms.Add(new TreasureRoom(roomRects[i], floorTiles["floor"]));
                 totalRooms--;
             }
             else

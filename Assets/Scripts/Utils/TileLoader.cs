@@ -71,4 +71,13 @@ public static class TileLoader
         return tileDict;
     }
 
+    public static Dictionary<string, TileBase> LoadTreasureTiles(string tileset)
+    {
+        Dictionary<string, TileBase> tileDict = new Dictionary<string, TileBase>();
+        string prefix = "Tiles/" + tileset + "/Treasure/";
+        tileDict.Add("treasureClosed", LoadTile(prefix, "treasureClosed"));
+        tileDict.Add("treasureOpen", LoadTile(prefix, "treasureOpen"));
+        return tileDict;
+    }
+
 }
