@@ -50,17 +50,22 @@ public class GameManager : MonoBehaviour
     public void transitionToDungeonScene()
     {
         dungeonController.generateDungeon(maxHealth + items.Count);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
         hearts = FindObjectOfType<HeartController>();
         inDungeon = true;
     }
     public void transitionToCampScene()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(0);
         inDungeon = false;
     }
 
-    
+    public void TransitionToWinScene()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+
     public int value;
     public int Value { get { return value; } set {
             this.value = value;
@@ -86,8 +91,8 @@ public class GameManager : MonoBehaviour
 
     public void SceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        hearts = FindObjectOfType<HeartController>();
-        CoinageText = FindObjectOfType<CoinTextController>();
+        hearts = FindObjectOfType<HeartController>(true);
+        CoinageText = FindObjectOfType<CoinTextController>(true);
     }
 
     private void OnDestroy()
@@ -108,6 +113,7 @@ public class GameManager : MonoBehaviour
         if (items.Contains(item.GetItemId())) return;
         items.Add(item.GetItemId());
         Value -= item.cost;
+        if (HasAllWinItems()) TransitionToWinScene();
         if (CoinageText == null) return;
         CoinageText.textElement.text = Value.ToString();
     }
@@ -117,8 +123,8 @@ public class GameManager : MonoBehaviour
         return Instance.items.Contains(item.GetItemId());
     }
 
-    public void InitializeGUI()
+    public bool HasAllWinItems()
     {
-        
+        return items.Contains(200) && items.Contains(201) && items.Contains(202);
     }
 }
