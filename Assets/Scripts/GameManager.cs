@@ -9,7 +9,12 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
+
+    // --- UI Elements ---
     public Text ValueText;
+    public HeartController hearts;
+
+    // --- END UI Elements ---
 
     public DungeonController dungeonController;
 
@@ -28,16 +33,21 @@ public class GameManager : MonoBehaviour
     
     // --- END Plyer Stats ---
 
+
+
+
     // dungeonFloors = DungeonGenerator.generateFloors(random parameters, 3)
 
     public void transitionToDungeonScene()
     {
         dungeonController.generateDungeon(5.7f, 4);
         SceneManager.LoadScene(0);
+        hearts = FindObjectOfType<HeartController>();
     }
     public void transitionToCampScene()
     {
         SceneManager.LoadScene(2);
+        hearts = FindObjectOfType<HeartController>();
     }
 
     

@@ -30,7 +30,6 @@ public class DungeonEquipmentScreenController : MonoBehaviour
 
     public void SetEquippedItem()
     {
-        Debug.Log(equipColor);
         childControllers.ForEach(child => child.SetColor(equipColor, notEquipColor));
     }
 }

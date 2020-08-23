@@ -40,8 +40,7 @@ public class EquipItemController : MonoBehaviour
 
     public void SetColor(Color equippedColor, Color notEquippedColor)
     {
-        Debug.Log(equippedColor);
-        if (GameManager.Instance != null)
+        if (GameManager.Instance != null && image != null)
         {
             if (GameManager.Instance.equippedWeapon == item.GetItemId())
             {
