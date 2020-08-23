@@ -10,6 +10,8 @@ public class ShopItemController : MonoBehaviour
     public Text itemText;
     public Text costText;
 
+    public Image predecessor;
+
     private void Start()
     {
         if (itemText != null && item != null) itemText.text = item.itemName;
@@ -29,6 +31,7 @@ public class ShopItemController : MonoBehaviour
             }
             else if (item is TorsoController torso)
             {
+                if (predecessor != null) predecessor.gameObject.SetActive(false);
                 torso.Equip();
                 var player = FindObjectOfType<PlayerController>();
                 if (player != null)
@@ -38,6 +41,7 @@ public class ShopItemController : MonoBehaviour
             }
             else if (item is HelmetController helmet)
             {
+                if (predecessor != null) predecessor.gameObject.SetActive(false);
                 helmet.Equip();
                 var player = FindObjectOfType<PlayerController>();
                 if(player != null)

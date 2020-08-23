@@ -24,6 +24,7 @@ public class HeartController : MonoBehaviour
         if (hearts != null && hearts.Count > 0)
         {
             hearts.ForEach(heart => Destroy(heart.gameObject));
+            hearts = new List<Image>();
         }
 
         for (int i = 0; i < GameManager.Instance.maxHealth; i++)
@@ -44,7 +45,7 @@ public class HeartController : MonoBehaviour
                 hearts[i].gameObject.SetActive(false);
             } else
             {
-                hearts[i].gameObject.SetActive(false);
+                hearts[i].gameObject.SetActive(true);
             }
         }
     }
