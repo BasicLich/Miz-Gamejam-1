@@ -38,8 +38,8 @@ public class HelmetController : AbsItem
             && GameManager.Instance.equippedHelmet != null
             && GameManager.Instance.equippedHelmet.GetItemId() != GetItemId())
         {
-            if (GameManager.Instance.equippedHelmet != null) GameManager.Instance.equippedHelmet.Unequip(); 
-            GameManager.Instance.maxHealth += extraHealth;
+            if (GameManager.Instance.equippedHelmet != null) GameManager.Instance.equippedHelmet.Unequip();
+            GameManager.Instance.MaxHealth += extraHealth;
             GameManager.Instance.equippedHelmet = this;
         }
     }
@@ -48,7 +48,7 @@ public class HelmetController : AbsItem
     {
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.maxHealth -= extraHealth;
+            GameManager.Instance.MaxHealth -= extraHealth;
         }
     }
 

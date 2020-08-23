@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return instance; } }
 
     // --- UI Elements ---
-    public Text ValueText;
+    public CoinTextController CoinageText;
     public HeartController hearts;
 
     // --- END UI Elements ---
@@ -24,6 +24,14 @@ public class GameManager : MonoBehaviour
 
     // --- Player Stats ---
     public int maxHealth = 3;
+    public int MaxHealth { get { return maxHealth; } set
+        {
+            maxHealth = value;
+            if (hearts != null)
+            {
+                hearts.CreateHearts();
+            }
+        } }
 
     public HelmetController equippedHelmet;
 
@@ -47,12 +55,15 @@ public class GameManager : MonoBehaviour
     public void transitionToCampScene()
     {
         SceneManager.LoadScene(2);
-        hearts = FindObjectOfType<HeartController>();
     }
 
     
     public int value;
-    public int Value { get { return value; } set { this.value = value; } }
+    public int Value { get { return value; } set {
+            this.value = value;
+            if (CoinageText != null) CoinageText.textElement.text = this.value.ToString();
+        }
+    }
 
     private void Awake()
     {
@@ -66,15 +77,27 @@ public class GameManager : MonoBehaviour
             dungeonController = new DungeonController();
             GameObject.DontDestroyOnLoad(gameObject);
             if (debug) value = 10000;
+            SceneManager.sceneLoaded += SceneLoaded;
         }
+    }
+
+    public void SceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        hearts = FindObjectOfType<HeartController>();
+        CoinageText = FindObjectOfType<CoinTextController>();
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= SceneLoaded;
     }
 
 
     public void AddValue(int value)
     {
         Value += value;
-        if (ValueText == null) return;
-        ValueText.text = Value.ToString();
+        if (CoinageText == null) return;
+        CoinageText.textElement.text = Value.ToString();
     }
 
     public void AddItem(AbsItem item)
@@ -82,8 +105,8 @@ public class GameManager : MonoBehaviour
         if (items.Contains(item.GetItemId())) return;
         items.Add(item.GetItemId());
         Value -= item.cost;
-        if (ValueText == null) return;
-        ValueText.text = Value.ToString();
+        if (CoinageText == null) return;
+        CoinageText.textElement.text = Value.ToString();
     }
 
     public bool HasBoughtItem(AbsItem item)

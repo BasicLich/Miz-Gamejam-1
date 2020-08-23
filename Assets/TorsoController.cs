@@ -36,7 +36,7 @@ public class TorsoController : AbsItem
             && GameManager.Instance.equippedTorso.GetItemId() != GetItemId())
         {
             if (GameManager.Instance.equippedTorso != null) GameManager.Instance.equippedTorso.Unequip(); 
-            GameManager.Instance.maxHealth += extraHealth;
+            GameManager.Instance.MaxHealth += extraHealth;
             GameManager.Instance.equippedTorso = this;
         }
     }
@@ -45,7 +45,7 @@ public class TorsoController : AbsItem
     {
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.maxHealth -= extraHealth;
+            GameManager.Instance.MaxHealth -= extraHealth;
         }
     }
 
